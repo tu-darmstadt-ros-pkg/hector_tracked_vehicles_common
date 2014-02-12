@@ -9,10 +9,8 @@
     <!-- Properties (Constants) -->
     <xacro:property name="M_PI" value="3.14159" />
     
-    <xacro:property name="wheel_radius" value="0.063" />
-    <xacro:property name="wheel_size_y" value="0.05" />
-    <xacro:property name="wheel_offset_x" value="0.16" />
-    <xacro:property name="wheel_offset_y" value="0.155" />
+    <!--<xacro:property name="wheel_radius" value="0.185" />-->
+    <!--<xacro:property name="wheel_size_y" value="0.0824" />-->
      <!-- half of wheel width + half of socket width + gap -->
     <xacro:property name="wheel_offset_z" value="-0.112" />
      <!-- wheel_radius - socket height -->
@@ -33,14 +31,14 @@
         
         <link name="${prefix}_wheel_link">
             <inertial>
-                <mass value="0.2" />
+                <mass value="0.01" />
                 <origin xyz=" 0 0 0 " />
                 <inertia  ixx="0.00012411765597" ixy="0.0" ixz="0.0"
                           iyy="0.00015218160428" iyz="0.0"
                           izz="0.00011763977943" />
             </inertial>
             
-            <visual>
+<!--            <visual>
                 <origin xyz="0 0 0" rpy="${-M_PI/2} 0 0" />
                 <geometry>
                     <cylinder radius="${wheel_radius}" length="${wheel_size_y}"/>
@@ -48,23 +46,26 @@
                 <material name="DarkGrey" >
                     <color rgba="0.3 0.3 0.3 1"/>
                 </material>
-            </visual>
+            </visual>-->
             
             <collision>
                 <origin xyz="0 0 0" rpy="${-M_PI/2} 0 0" />
                 <geometry>
                     <cylinder radius="${wheel_radius}" length="${wheel_size_y}" />
                 </geometry>
-                <material name="MTWheelColMat"/>
+                <!--<material name="MTWheelColMat"/>-->
             </collision>
         </link>
         
         <gazebo reference="${prefix}_wheel_link" >
-            <mu1 value="100.0" />
-            <mu2 value="100.0" />
-            <kp  value="100000.0" />
-            <kd  value="1.0" />
-            <material>Gazebo/Grey</material>
+            <mu1>0.9</mu1>
+            <mu2>0.9</mu2>
+            <kp>100000.0</kp>
+            <kd>1.0</kd>
+            <minDepth>0.001</minDepth>
+<!--            <fdir1>1 0 0</fdir1>-->
+            <maxContacts>1</maxContacts>
+            <material>Gazebo/Grey</material>           
         </gazebo>
         
         

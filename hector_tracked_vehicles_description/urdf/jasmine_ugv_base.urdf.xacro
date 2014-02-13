@@ -16,7 +16,7 @@
     
     <property name="wheel_radius" value="0.085" />
     <property name="wheel_length" value="0.02" />
-    <property name="wheel_size_y" value="0.05" />
+    <property name="wheel_size_y" value="0.0825" />
     
     <property name="total_width" value="0.297" />
     <!--    <property name="wheel_offset_y" value="${(total_width - wheel_size_y) / 2}" />-->
@@ -99,8 +99,8 @@
         
         <!--	Add wheels using the hlugv_wheel macro -->
         <tracked_wheel parent="base_link" prefix="left_0" offset_x= "0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" />
-        <tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" />
-        <tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" />
+        <tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" />
+        <tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" />
         <tracked_wheel parent="base_link" prefix="left_3" offset_x= "0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" />
         <tracked_wheel parent="base_link" prefix="left_4" offset_x= "-0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" />
         <tracked_wheel parent="base_link" prefix="right_0" offset_x= "0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" />
@@ -120,7 +120,7 @@
                 <rightJoints>right_0_wheel_joint right_1_wheel_joint right_2_wheel_joint right_3_wheel_joint right_4_wheel_joint</rightJoints>
                 <wheelSeparation>${wheel_offset_y*2}</wheelSeparation>
                 <wheelDiameter>${wheel_radius*2}</wheelDiameter>
-                <torque>5000</torque>
+                <torque>50000</torque>
                 <interface:position name="position_iface_2"/>
                 <robotNamespace>/</robotNamespace>
                 <topicName>cmd_vel</topicName>

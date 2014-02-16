@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<robot name="jasmine_ugv"
+    xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+    
+    <!-- Included URDF Files -->
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_base.urdf.xacro" />
+    <xacro:include filename="$(find hector_components_description)/urdf/vision_box_common.urdf.xacro"/>
+    <xacro:include filename="$(find hector_components_description)/urdf/vision_box_dimensions_hector2.urdf.xacro" />
+    
+    <jasmine_ugv_macro />
+    
+    <xacro:vision_box parent="base_link" box_type="hector2">
+      <origin xyz="-0.05 0 0.11" rpy="0 0 0"/>
+    </xacro:vision_box>
+    
+</robot>

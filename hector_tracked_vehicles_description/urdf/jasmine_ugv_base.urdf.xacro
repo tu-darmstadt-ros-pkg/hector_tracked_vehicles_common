@@ -125,6 +125,30 @@
                 <robotNamespace>/</robotNamespace>
                 <topicName>cmd_vel</topicName>
         </plugin>
+        
+        <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50.0</updateRate>
+          <bodyName>base_link</bodyName>
+          <topicName>ground_truth/state</topicName>
+          <gaussianNoise>0.01</gaussianNoise>
+          <frameName>world</frameName>
+          <xyzOffsets>0 0 0</xyzOffsets>
+          <rpyOffsets>0 0 0</rpyOffsets>
+        </plugin>
+
+        <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50.0</updateRate>
+          <bodyName>base_link</bodyName>
+          <topicName>raw_imu</topicName>
+          <accelDrift>0.0 0.0 0.0</accelDrift>
+          <accelGaussianNoise>0.1 0.1 0.1</accelGaussianNoise>
+          <rateDrift>0.0 0.0 0.0</rateDrift>
+          <rateGaussianNoise>0.05 0.05 0.05</rateGaussianNoise>
+          <headingDrift>0.0</headingDrift>
+          <headingGaussianNoise>0.05</headingGaussianNoise>
+        </plugin>
             
 <!--        <plugin name="gazebo_ros_controller_manager" filename="libgazebo_ros_controller_manager.so">
           <alwaysOn>true</alwaysOn>

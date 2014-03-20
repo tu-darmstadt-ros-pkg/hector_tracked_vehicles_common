@@ -32,7 +32,7 @@
     <macro name="jasmine_ugv_macro">
         <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
              navigation stack depends on this frame -->
-        <link name="base_footprint">
+<!--        <link name="base_footprint">
             <inertial>
                 <mass value="0.0001" />
                 <origin xyz="0 0 0" />
@@ -51,12 +51,6 @@
                 </material>
             </visual>
             
-            <!--            <collision>
-                <origin xyz="0 0 ${base_size_z/2 + ground_clearance}" rpy="0 0 0" />
-                <geometry>
-                  <box size="0.001 0.001 0.001" />
-                </geometry>
-            </collision>-->
         </link>
         
         <joint name="base_footprint_joint" type="fixed">
@@ -64,7 +58,7 @@
              
             <parent link="base_footprint"/>
             <child link="base_link" />
-        </joint>
+        </joint>-->
         
         <!-- Links and Joints (i.e., the robot) -->
         <link name="base_link">
@@ -111,9 +105,7 @@
         
         <gazebo>
             
-        <plugin name="diffdrive_plugin_multiwheel" filename="libdiffdrive_plugin_multi_wheel.so">    
-            
-<!--        <controller:diffdrive_plugin_6w name="differential_drive_controller" plugin="libdiffdrive_plugin_6w.so">-->
+        <plugin name="diffdrive_plugin_multiwheel" filename="libdiffdrive_plugin_multi_wheel.so">                
                 <alwaysOn>true</alwaysOn>
                 <updateRate>100.0</updateRate>
                 <leftJoints>left_0_wheel_joint left_1_wheel_joint left_2_wheel_joint left_3_wheel_joint left_4_wheel_joint</leftJoints>
@@ -123,7 +115,10 @@
                 <torque>50000</torque>
                 <interface:position name="position_iface_2"/>
                 <robotNamespace>/</robotNamespace>
-                <topicName>cmd_vel</topicName>
+                <robotBaseFrame>base_link</robotBaseFrame>
+                <commandTopic>/cmd_vel_raw</commandTopic>
+                <publishOdometryTf>0</publishOdometryTf>
+                <publishOdometryMsg>1</publishOdometryMsg>
         </plugin>
         
         <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">

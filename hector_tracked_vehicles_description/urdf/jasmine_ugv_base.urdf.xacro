@@ -107,7 +107,7 @@
             
         <plugin name="diffdrive_plugin_multiwheel" filename="libdiffdrive_plugin_multi_wheel.so">                
                 <alwaysOn>true</alwaysOn>
-                <updateRate>100.0</updateRate>
+                <updateRate>10.0</updateRate>
                 <leftJoints>left_0_wheel_joint left_1_wheel_joint left_2_wheel_joint left_3_wheel_joint left_4_wheel_joint</leftJoints>
                 <rightJoints>right_0_wheel_joint right_1_wheel_joint right_2_wheel_joint right_3_wheel_joint right_4_wheel_joint</rightJoints>
                 <wheelSeparation>${wheel_offset_y*2}</wheelSeparation>

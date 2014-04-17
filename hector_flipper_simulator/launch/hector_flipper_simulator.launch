@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <node pkg="ros_flipper_simulator" type="ros_flipper_simulator_node" name="ros_flipper_simulator" output="screen">
+    
+  </node>
+</launch>
+  
+  

@@ -15,6 +15,7 @@
     <property name="base_size_z" value="0.085" />
     
     <property name="wheel_radius_big" value="0.085" />
+    
     <property name="wheel_length" value="0.02" />
     <property name="wheel_size_y" value="0.0825" />
     
@@ -29,7 +30,7 @@
     <property name="top_size_y" value="0.3556" />
     <property name="top_size_z" value="0.0020" />
       
-    <macro name="jasmine_ugv_macro">
+    <macro name="obelix_ugv_macro">
         <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
              navigation stack depends on this frame -->
 <!--        <link name="base_footprint">
@@ -74,7 +75,7 @@
                 <origin xyz="0.0 0.0 -0.085" rpy="0 0 0" />
                 <geometry>
                     <!--<box size="${base_size_x} ${base_size_y} ${base_size_z}" />-->
-                    <mesh filename="package://hector_tracked_vehicles_description/meshes/jasmine_ugv/jasmine_ugv_simple_colored_v001.dae"/>
+                    <mesh filename="package://hector_tracked_vehicles_description/meshes/jasmine_ugv/obelix_ugv_simple_colored_v001.dae"/>
                 </geometry>
                 <material name="Grey" >
                     <color rgba="0.8 0.8 0.8 1"/>
@@ -91,7 +92,7 @@
         </link>
         
         
-       <!--	Add wheels using the hlugv_wheel macro -->
+        <!--	Add wheels using the hlugv_wheel macro -->
         <tracked_wheel parent="base_link" prefix="left_0" offset_x= "0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
         <tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
         <tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>

@@ -15,7 +15,7 @@
     <xacro:property name="wheel_offset_z" value="-0.112" />
      <!-- wheel_radius - socket height -->
     
-    <xacro:macro name="tracked_wheel" params="parent prefix offset_x offset_y offset_z reflect">
+    <xacro:macro name="tracked_wheel" params="parent prefix offset_x offset_y offset_z reflect wheel_radius">
         
         <joint name="${prefix}_wheel_joint" type="continuous">
             <origin xyz="${offset_x } ${offset_y * reflect} ${offset_z}" rpy="0 0 0" />

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="robot_description" default="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_standalone2.urdf.xacro'"/>
+  
+  <param name="robot_description" command="$(arg robot_description)" />
+  <param name="use_gui" value="True"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hector_tracked_vehicles_description)/rviz/xacrodisplay.rviz"/>
+</launch>

@@ -13,7 +13,7 @@
     <property name="wheel_radius_third" value="0.08" />
 <property name="wheel_intersect_flipper" value="${((flipper_x-2*wheel_radius_first-2*wheel_radius_second-2*wheel_radius_third)/2)}" />
 <property name="wheel_pos_second" value="${2*wheel_radius_first+wheel_intersect_flipper}" />
-    <macro name="obelix_flipper_macro" params="parent name front *origin">
+    <macro name="obelix_flipper_wheels_macro" params="parent name front *origin">
     
  <!-- front is either 1 (for front flipper) or -1 (for back flipper) -->
 <joint name="${parent}_${name}_flipper_joint" type="revolute">    

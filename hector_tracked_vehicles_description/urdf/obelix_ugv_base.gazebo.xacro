@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<robot name="obelix_ugv_sim_wheels"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+    
+    <!-- Included URDF Files -->
+    <include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_2flipper_wheel.urdf.xacro" />
+
+
+
+
+  <!-- use for 2*2 flippers --> 
+  <obelix_flipper_wheels_macro parent="base_link" name="front" front="1">
+    <origin xyz="${base_size_x*0.5} ${base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y}  0 " rpy="0 0 0"/>
+  </obelix_flipper_wheels_macro > 
+
+  <obelix_flipper_wheels_macro parent="base_link" name="back" front="-1">
+    <origin xyz="${-base_size_x*0.5} ${(base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y)}  0  " rpy="0 0 0"/>
+  </obelix_flipper_wheels_macro >
+  
+          <!--  Add wheels using the hlugv_wheel macro -->
+        <tracked_wheel parent="base_link" prefix="left_0" offset_x= "0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="left_3" offset_x= "0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="left_4" offset_x= "-0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="right_0" offset_x= "0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="right_1" offset_x= "0.0" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="right_2" offset_x= "-0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="right_3" offset_x= "-0.10550" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <tracked_wheel parent="base_link" prefix="right_4" offset_x= "0.10550" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        
+        <gazebo>
+            
+        <plugin name="diffdrive_plugin_multiwheel" filename="libdiffdrive_plugin_multi_wheel.so">                
+                <alwaysOn>true</alwaysOn>
+                <updateRate>10.0</updateRate>
+                <leftJoints>left_0_wheel_joint left_1_wheel_joint left_2_wheel_joint left_3_wheel_joint left_4_wheel_joint</leftJoints>
+                <rightJoints>right_0_wheel_joint right_1_wheel_joint right_2_wheel_joint right_3_wheel_joint right_4_wheel_joint</rightJoints>
+                <wheelSeparation>${wheel_offset_y*2}</wheelSeparation>
+                <wheelDiameter>${wheel_radius_big*2}</wheelDiameter>
+                <torque>50000</torque>
+                <interface:position name="position_iface_2"/>
+                <robotNamespace>/</robotNamespace>
+                <robotBaseFrame>base_link</robotBaseFrame>
+                <commandTopic>/cmd_vel_raw</commandTopic>
+                <publishOdometryTf>0</publishOdometryTf>
+                <publishOdometryMsg>1</publishOdometryMsg>
+        </plugin>
+        
+        <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50.0</updateRate>
+          <bodyName>base_link</bodyName>
+          <topicName>ground_truth/state</topicName>
+          <gaussianNoise>0.01</gaussianNoise>
+          <frameName>world</frameName>
+          <xyzOffsets>0 0 0</xyzOffsets>
+          <rpyOffsets>0 0 0</rpyOffsets>
+        </plugin>
+
+        <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50.0</updateRate>
+          <bodyName>base_link</bodyName>
+          <topicName>imu_quat</topicName>
+          <accelDrift>0.0 0.0 0.0</accelDrift>
+          <accelGaussianNoise>0.1 0.1 0.1</accelGaussianNoise>
+          <rateDrift>0.0 0.0 0.0</rateDrift>
+          <rateGaussianNoise>0.05 0.05 0.05</rateGaussianNoise>
+          <headingDrift>0.0</headingDrift>
+          <headingGaussianNoise>0.05</headingGaussianNoise>
+        </plugin>
+            
+<!--        <plugin name="gazebo_ros_controller_manager" filename="libgazebo_ros_controller_manager.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>1000.0</updateRate>
+        </plugin>-->
+            
+           <!-- 
+            <canonicalBody>base_footprint</canonicalBody>
+            
+            <controller:gazebo_ros_controller_manager name="gazebo_ros_controller_manager" plugin="libgazebo_ros_controller_manager.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>100.0</updateRate>
+                <interface:audio name="gazebo_ros_controller_manager_dummy_iface" />
+            </controller:gazebo_ros_controller_manager>
+            
+            <controller:gazebo_ros_imu name="imu_controller" plugin="libgazebo_ros_imu.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>50</updateRate>
+                <bodyName>base_link</bodyName>
+                <topicName>hlugv_imu</topicName>
+                <gaussianNoise>0.1</gaussianNoise>
+                <xyzOffsets>0 0 0</xyzOffsets> 
+                <rpyOffsets>0 0 0</rpyOffsets>
+                <interface:position name="imu_position"/>
+            </controller:gazebo_ros_imu>
+            -->
+            
+        </gazebo>
+        
+        <gazebo reference="base_link">
+            <material>HLUGV/Green</material>
+        </gazebo>
+  
+
+  
+</robot>

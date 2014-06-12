@@ -9,8 +9,16 @@
     <include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_base.urdf.xacro" />
     <obelix_ugv_macro />
     
-    <include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_base.gazebo.xacro" />
+    
+    
+    <include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_2flipper_box.urdf.xacro" />
+      <!-- use for 2*2 flippers --> 
+   <obelix_flipper_macro parent="base_link" name="front" front="1">
+     <origin xyz="${base_size_x*0.5} ${base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y}  0 " rpy="0 0 0"/>
+   </obelix_flipper_macro > 
 
-
+  <obelix_flipper_macro parent="base_link" name="back" front="-1">
+    <origin xyz="${-base_size_x*0.5} ${(base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y)}  0  " rpy="0 0 0"/>
+  </obelix_flipper_macro >
   
 </robot>

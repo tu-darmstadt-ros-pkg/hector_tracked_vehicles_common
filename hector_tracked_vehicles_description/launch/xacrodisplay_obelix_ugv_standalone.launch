@@ -2,29 +2,12 @@
 
 
 <launch>
-   <!-- <param name="use_sim_time" value="true" /> -->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_standalone2.urdf.xacro'" />
+  <param name="use_gui" value="True"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hector_tracked_vehicles_description)/rviz/xacrodisplay.rviz"/>
 
-    <!-- send the robot XML to param server -->
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_standalone2.urdf.xacro'" />
-
-    <!-- push robot_description to factory and spawn robot in gazebo -->
-    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
-      args="-param robot_description
-            -urdf
-            -z 0.7
-            -model robot_description"
-      respawn="false" output="screen" />
-
-<!-- send fake joint values -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="TRUE"/>
-  </node>
-  <!-- send fake joint values -->
- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
-<param name="publish_frequency" type="double" value="50.0" />
-  </node>
-
-<node name="rviz" pkg="rviz" type="rviz" args="-d $(find hector_tracked_vehicles_description)/launch/obelix.rviz"/>
 
     <!-- start robot state publisher -->
     <!--

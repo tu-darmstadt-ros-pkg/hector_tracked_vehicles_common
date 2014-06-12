@@ -43,9 +43,9 @@
 
  <tracked_wheel parent="left_${name}_flipper_base_link" prefix="first_${name}_left" offset_x= "0" offset_y = "0" offset_z = "0" reflect="1" wheel_radius="${wheel_radius_first}"/>
 
-<tracked_wheel parent="left_${name}_flipper_base_link" prefix="second_${name}_left" offset_x= "${front*(2*wheel_radius_first+((flipper_x-2*wheel_radius_first-2*wheel_radius_second-2*wheel_radius_third)/2))}" offset_y = "0" offset_z = "0" reflect="1" wheel_radius="${wheel_radius_second}"/>
+ <tracked_wheel parent="left_${name}_flipper_base_link" prefix="second_${name}_left" offset_x= "${front*(2*wheel_radius_first+((flipper_x-2*wheel_radius_first-2*wheel_radius_second-2*wheel_radius_third)/2))}" offset_y = "0" offset_z = "0" reflect="1" wheel_radius="${wheel_radius_second}"/>
 
-<tracked_wheel parent="left_${name}_flipper_base_link" prefix="third_${name}_left" offset_x= "${front*(flipper_x-wheel_radius_third+((flipper_x-2*wheel_radius_first-2*wheel_radius_second-2*wheel_radius_third)/2))}" offset_y = "0" offset_z = "0" reflect="1" wheel_radius="${wheel_radius_second}"/>
+ <tracked_wheel parent="left_${name}_flipper_base_link" prefix="third_${name}_left" offset_x= "${front*(flipper_x-wheel_radius_third+((flipper_x-2*wheel_radius_first-2*wheel_radius_second-2*wheel_radius_third)/2))}" offset_y = "0" offset_z = "0" reflect="1" wheel_radius="${wheel_radius_second}"/>
 
 
  

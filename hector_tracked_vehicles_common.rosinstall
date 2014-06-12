@@ -1,0 +1,6 @@
+- git:
+    uri: https://github.com/tu-darmstadt-ros-pkg/hector_tracked_vehicles_common.git
+    local-name: src/hector_tracked_vehicles_common
+- git:
+    uri: https://github.com/tu-darmstadt-ros-pkg/hector_models.git
+    local-name: src/hector_models

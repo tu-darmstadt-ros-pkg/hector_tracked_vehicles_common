@@ -17,7 +17,7 @@
      <origin xyz="${base_size_x*0.5} ${base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y}  0 " rpy="0 0 0"/>
    </obelix_flipper_macro > 
 
-  <obelix_flipper_macro parent="base_link" name="back" front="-1">
+  <obelix_flipper_macro parent="base_link" name="rear" front="-1">
     <origin xyz="${-base_size_x*0.5} ${(base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y)}  0  " rpy="0 0 0"/>
   </obelix_flipper_macro >
   

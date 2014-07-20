@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<robot name="obelix_ugv"
+    xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+    <!-- Included URDF Files -->
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_standalone.urdf.xacro" />
+    <xacro:include filename="$(find hector_components_description)/urdf/vision_box_common.urdf.xacro"/>
+    <xacro:include filename="$(find hector_components_description)/urdf/vision_box_dimensions_hector2.urdf.xacro" />
+    <xacro:include filename="$(find hector_small_arm_description)/urdf/hector_arm_ax12_5dof.urdf.xacro" />
+
+  <!--<obelix_ugv_macro />-->
+
+  <xacro:vision_box parent="base_link" box_type="hector2">
+    <origin xyz="-0.05 0 0.11" rpy="0 0 0"/>
+  </xacro:vision_box>
+
+  <xacro:hector_arm parent="top_box_link">
+    <origin xyz="-0.180 0 0.225" rpy="0 -0.4 0"/>
+  </xacro:hector_arm>
+
+</robot>

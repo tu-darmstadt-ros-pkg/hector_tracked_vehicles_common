@@ -11,7 +11,7 @@
     <macro name="obelix_flipper_macro" params="parent name front *origin">
     
  <!-- front is either 1 (for front flipper) or -1 (for back flipper) -->
-<joint name="${parent}_${name}_flipper_joint" type="revolute">    
+<joint name="${name}_flipper_joint" type="revolute">    
 <insert_block name="origin"/>
       <axis xyz="0 1 0"/>
       <limit lower="${-90 * M_PI / 180}" upper="${90 * M_PI / 180}"

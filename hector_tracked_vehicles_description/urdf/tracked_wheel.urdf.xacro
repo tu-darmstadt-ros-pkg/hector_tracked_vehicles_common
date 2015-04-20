@@ -59,13 +59,12 @@
         </link>
         
         <gazebo reference="${prefix}_wheel_link" >
-            <mu1>0.9</mu1>
-            <mu2>0.9</mu2>
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
             <kp>1000000.0</kp>
-            <kd>10.0</kd>            
+            <kd>100.0</kd>
             <minDepth>0.001</minDepth>
-            <maxContacts>1</maxContacts>
-            <material>Gazebo/Grey</material>           
+            <maxVel>1.0</maxVel>         
             <!--<fdir1>1 0 0</fdir1>-->
             <!--<maxVel>1.0</maxVel>-->
         </gazebo>

@@ -5,30 +5,8 @@
     xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
     
-    <gazebo>
-	    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
-	      <alwaysOn>true</alwaysOn>
-	      <updateRate>50.0</updateRate>
-	      <bodyName>base_link</bodyName>
-	      <topicName>imu_quat</topicName>
-	      <accelDrift>0.0 0.0 0.0</accelDrift>
-	      <accelGaussianNoise>0.1 0.1 0.1</accelGaussianNoise>
-	      <rateDrift>0.0 0.0 0.0</rateDrift>
-	      <rateGaussianNoise>0.05 0.05 0.05</rateGaussianNoise>
-	      <headingDrift>0.0</headingDrift>
-	      <headingGaussianNoise>0.05</headingGaussianNoise>
-	    </plugin>
 
-    </gazebo>
    
-    <property name="flipper_offset_x" value="0.205" />
-    <property name="flipper_offset_y" value="0.15" />
-    <property name="flipper_offset_z" value="0.099" />
-    
-    <property name="M_PI" value="3.14159" />
-    <property name="angle_deg" value="45" />
-    
-
     <include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.urdf.xacro.xml" />
     <include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.gazebo.xacro.xml" />
 
@@ -36,10 +14,28 @@
     <include filename="$(find hector_components_description)/urdf/vision_box_dimensions_hector2.urdf.xacro" />
     
     <tracker_chassis_macro />
-    <tracker_chassis_gazebo_macro />
-
+    
     <vision_box parent="chassis_link" box_type="hector2">
       <origin xyz="-0.155 0 0.105" rpy="0 0 0"/>
     </vision_box>  
-
-</robot>
+    
+    
+    <tracker_chassis_gazebo_macro />    
+    
+    <gazebo>
+      <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>50.0</updateRate>
+        <bodyName>base_link</bodyName>
+        <topicName>imu_quat</topicName>
+        <accelDrift>0.0 0.0 0.0</accelDrift>
+        <accelGaussianNoise>0.1 0.1 0.1</accelGaussianNoise>
+        <rateDrift>0.0 0.0 0.0</rateDrift>
+        <rateGaussianNoise>0.05 0.05 0.05</rateGaussianNoise>
+        <headingDrift>0.0</headingDrift>
+        <headingGaussianNoise>0.05</headingGaussianNoise>
+      </plugin>      
+    </gazebo>
+    
+  </robot>
+  

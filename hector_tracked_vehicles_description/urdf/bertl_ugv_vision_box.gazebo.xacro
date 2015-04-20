@@ -3,14 +3,15 @@
 <robot name="bertl_ugv "
     xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
     xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
   
     <!--Include complete standard bertl setup-->
-    <include filename="$(find hector_tracked_vehicles_description)/urdf/bertl_ugv_vision_box.urdf.xacro"/>
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/bertl_ugv_vision_box.urdf.xacro"/>
     
     <!-- Add gazebo specific additions -->
-    <include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.gazebo.xacro.xml" />
-    <tracker_chassis_gazebo_macro />    
+    <xacro:include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.gazebo.xacro.xml" />
+    <xacro:tracker_chassis_gazebo_macro />    
     
   </robot>
   

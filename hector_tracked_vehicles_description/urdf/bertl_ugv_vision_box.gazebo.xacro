@@ -28,13 +28,15 @@
     <property name="M_PI" value="3.14159" />
     <property name="angle_deg" value="45" />
     
+
+    <include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.urdf.xacro.xml" />
     <include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.gazebo.xacro.xml" />
 
     <include filename="$(find hector_components_description)/urdf/vision_box_common.urdf.xacro"/>
     <include filename="$(find hector_components_description)/urdf/vision_box_dimensions_hector2.urdf.xacro" />
     
     <tracker_chassis_macro />
-
+    <tracker_chassis_gazebo_macro />
 
     <vision_box parent="chassis_link" box_type="hector2">
       <origin xyz="-0.155 0 0.105" rpy="0 0 0"/>

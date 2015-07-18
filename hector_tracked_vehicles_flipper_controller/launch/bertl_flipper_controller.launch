@@ -3,7 +3,7 @@
 <launch>
 
    <node name="bertl_flipper_controller" pkg="hector_tracked_vehicles_flipper_controller" type="hector_tracked_vehicles_flipper_controller_node" >
-   	<rosparam file="$(find hector_tracked_vehicles_flipper_controller_node)/config/common.yaml" />
+   	<rosparam file="$(find hector_tracked_vehicles_flipper_controller)/config/config.yaml" />
    </node>
 
 </launch>

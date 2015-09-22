@@ -13,8 +13,8 @@
     <xacro:include filename="$(find taurob_tracker_description)/urdf/tracker_chassis.gazebo.xacro.xml" />
     
     <!--Choose one of two modes of simulated locomotion-->
-    <xacro:tracker_chassis_gazebo_fake_wheels_macro />
-    <!--<xacro:tracker_chassis_gazebo_force_based_move_macro />-->    
+    <!--<xacro:tracker_chassis_gazebo_fake_wheels_macro />-->
+    <xacro:tracker_chassis_gazebo_force_based_move_macro />    
     
 </robot>
   

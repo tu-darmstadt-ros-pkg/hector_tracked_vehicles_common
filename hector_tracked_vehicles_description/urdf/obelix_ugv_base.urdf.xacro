@@ -1,99 +1,138 @@
 <?xml version="1.0"?>
 
 <robot
-    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+  
+  <include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+  <include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
+  
+  <!-- Properties (Constants) -->
+  <property name="M_PI" value="3.14159"/>
+  
+  <property name="base_size_x" value="0.52" />
+  <property name="base_size_y" value="0.18" />
+  <property name="base_size_z" value="0.118" />
+  
+  <property name="wheel_radius_big" value="0.085" />
+  
+  <property name="wheel_offset_x" value="${base_size_x*0.5 - 0.042}" />
+  <property name="wheel_offset_z" value="${base_size_z*0.5 - 0.065}" />
+  <property name="wheel_radius"   value="0.09" />
+  
+  <property name="track_width"    value="0.1" />
+  <property name="track_offset_y"    value="0.155" />
+  
+  <property name="flipper_width"    value="0.08" />    
+  <property name="flipper_offset_y"    value="0.245" />
+  <property name="flipper_offset_wheel_axis_x"    value="0.225" />
+  
+  
+  <property name="wheel_length" value="0.02" />
+  <property name="wheel_size_y" value="0.0825" />
+  
+  <property name="total_width" value="0.297" />
+  <!--    <property name="wheel_offset_y" value="${(total_width - wheel_size_y) / 2}" />-->
+  <property name="wheel_offset_y" value="0.1697" />
+  <property name="wheel_offset_z_from_base_link" value="-0.0" />
+  
+  <property name="ground_clearance" value="0.05" />
+  
+  <property name="top_size_x" value="0.3937" />
+  <property name="top_size_y" value="0.3556" />
+  <property name="top_size_z" value="0.0020" />
+  
+  
+  
+  <!--
+  Note macros below are exact copies of each with expection of the
+  visual/collision tags.
+  -->
+  
+  <macro name="track_geom_macro_visual" params="offset_y">
+    <visual>
+      <origin xyz="${wheel_offset_x} ${offset_y} ${wheel_offset_z}" rpy="${M_PI*0.5} 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${track_width}" />
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="${-wheel_offset_x} ${offset_y} ${wheel_offset_z}" rpy="${M_PI*0.5} 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${track_width}" />
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0.0 ${offset_y} ${wheel_offset_z}" rpy="0 0 0" />
+      <geometry>
+        <box size="${base_size_x - wheel_radius} ${track_width} ${wheel_radius*2}" />
+      </geometry>
+    </visual>
+  </macro>
+  
+  <macro name="track_geom_macro_collision" params="offset_y">
+    <collision>
+      <origin xyz="${wheel_offset_x} ${offset_y} ${wheel_offset_z}" rpy="${M_PI*0.5} 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${track_width}" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="${-wheel_offset_x} ${offset_y} ${wheel_offset_z}" rpy="${M_PI*0.5} 0 0" />
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${track_width}" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.0 ${offset_y} ${wheel_offset_z}" rpy="0 0 0" />
+      <geometry>
+        <box size="${base_size_x - wheel_radius} ${track_width} ${wheel_radius*2}" />
+      </geometry>
+    </collision>
+  </macro>  
+  
+  <macro name="obelix_ugv_macro">
     
-    <include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
-    
-    <!-- Properties (Constants) -->
-    <property name="M_PI" value="3.14159"/>
-    
-    <property name="base_size_x" value="0.380" />
-    <property name="base_size_y" value="0.12" />
-    <property name="base_size_z" value="0.085" />
-    
-    <property name="wheel_radius_big" value="0.085" />
-    
-    <property name="wheel_length" value="0.02" />
-    <property name="wheel_size_y" value="0.0825" />
-    
-    <property name="total_width" value="0.297" />
-    <!--    <property name="wheel_offset_y" value="${(total_width - wheel_size_y) / 2}" />-->
-    <property name="wheel_offset_y" value="0.1697" />
-    <property name="wheel_offset_z_from_base_link" value="-0.0" />
-    
-    <property name="ground_clearance" value="0.05" />
-    
-    <property name="top_size_x" value="0.3937" />
-    <property name="top_size_y" value="0.3556" />
-    <property name="top_size_z" value="0.0020" />
+    <!-- Links and Joints (i.e., the robot) -->
+    <link name="base_link">
       
-    <macro name="obelix_ugv_macro">
-        <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
-             navigation stack depends on this frame -->
-<!--        <link name="base_footprint">
-            <inertial>
-                <mass value="0.0001" />
-                <origin xyz="0 0 0" />
-                <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
-                         iyy="0.0001" iyz="0.0" 
-                         izz="0.0001" />
-            </inertial>
-            
-            <visual>
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <geometry>
-                    <box size="0.001 0.001 0.001" />
-                </geometry>
-                <material name="Green" >
-                    <color rgba="0 0.8 0 1"/>
-                </material>
-            </visual>
-            
-        </link>
-        
-        <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${base_size_z/2 + 0.051}" rpy="0 0 0" />
-             
-            <parent link="base_footprint"/>
-            <child link="base_link" />
-        </joint>-->
-        
-        <!-- Links and Joints (i.e., the robot) -->
-        <link name="base_link">
-            <inertial>
-                <mass value="25.0" />
-                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-                <inertia ixx="0.005" ixy="0.0" ixz="0.0"
-                         iyy="0.005" iyz="0.0" 
-                         izz="0.005" />
-            </inertial>
-            
-            <visual>
-                <origin xyz="0.0 0.0 -0.085" rpy="0 0 0" />
-                <geometry>
-                    <!--<box size="${base_size_x} ${base_size_y} ${base_size_z}" />-->
-                    <mesh filename="package://hector_tracked_vehicles_description/meshes/jasmine_ugv/obelix_ugv_simple_colored_v001.dae"/>
-                </geometry>
-                <material name="Grey" >
-                    <color rgba="0.8 0.8 0.8 1"/>
-                </material>
-                
-            </visual>
-            
-            <collision>
-                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-                <geometry>
-                    <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
-                </geometry>
-            </collision>
-        </link>
+      <inertial_cuboid_with_pose mass="40" x_length="${base_size_x}" y_length="${base_size_y}" z_length="${base_size_z}" >
+        <origin xyz="0 0.0 0.0" rpy="0 0 0" />
+      </inertial_cuboid_with_pose>
+      
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+        </geometry>
+        <geometry>
+          <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+        </geometry>
         
         
-
-        
-        
-    </macro>
+        <material name="Grey" >
+          <color rgba="0.8 0.8 0.8 1"/>
+        </material>                
+      </visual>
+      
+      <track_geom_macro_visual offset_y="${ track_offset_y}"/>
+      <track_geom_macro_visual offset_y="${-track_offset_y}"/>        
+      
+      
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+        </geometry>
+        <geometry>
+          <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+        </geometry>            
+      </collision>       
+      
+      <track_geom_macro_collision offset_y="${ track_offset_y}"/>
+      <track_geom_macro_collision offset_y="${-track_offset_y}"/>
+    </link>
+    
+  </macro>
 </robot>

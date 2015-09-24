@@ -14,6 +14,7 @@
             -z 0.7
             -model robot_description"
       respawn="false" output="screen" />
+    
 
     <!-- start robot state publisher -->
     <!--

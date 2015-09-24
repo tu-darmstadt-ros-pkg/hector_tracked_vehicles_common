@@ -1,0 +1,26 @@
+obelix_robot:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+    
+  flipper_traj_controller:
+      type: "effort_controllers/JointTrajectoryController"
+      joints:
+        - front_flipper_joint
+        - rear_flipper_joint
+
+      gains: # Required because we're controlling an effort interface
+        front_flipper_joint: {p: 4000,  d: 0, i: 0, i_clamp: 0}
+        rear_flipper_joint:  {p: 4000,  d: 0, i: 0, i_clamp: 0}
+
+      constraints:
+        goal_time: 4.0
+        stopped_velocity_tolerance: 1.0
+        front_flipper_joint:
+          goal: 1.0
+          trajectory: 1.0
+        rear_flipper_joint:
+          goal: 1.0
+          trajectory: 1.0
+
+      stop_trajectory_duration: 1.0

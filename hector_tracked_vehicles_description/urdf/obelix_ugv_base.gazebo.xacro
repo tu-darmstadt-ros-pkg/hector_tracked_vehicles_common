@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 
 <robot name="obelix_ugv_sim_wheels"
-    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:xacro="http://www.ros.org/wiki/xacro"
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
     
     <!-- Included URDF Files -->
@@ -105,7 +104,5 @@
         <gazebo reference="base_link">
             <material>HLUGV/Green</material>
         </gazebo>
-  
 
-  
 </robot>

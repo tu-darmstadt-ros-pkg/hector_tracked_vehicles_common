@@ -5,43 +5,43 @@
   xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
   xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
   
-  <include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
-  <include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
+  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+  <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
   
   <!-- Properties (Constants) -->
-  <property name="M_PI" value="3.14159"/>
+  <xacro:property name="M_PI" value="3.14159"/>
   
-  <property name="base_link_size_x" value="0.52" />
-  <property name="base_link_size_y" value="0.18" />
-  <property name="base_link_size_z" value="0.118" />
+  <xacro:property name="base_link_size_x" value="0.52" />
+  <xacro:property name="base_link_size_y" value="0.18" />
+  <xacro:property name="base_link_size_z" value="0.118" />
   
-  <property name="wheel_radius_big" value="0.085" />
+  <xacro:property name="wheel_radius_big" value="0.085" />
   
-  <property name="wheel_offset_x" value="${base_link_size_x*0.5 - 0.042}" />
-  <property name="wheel_offset_z" value="${base_link_size_z*0.5 - 0.065}" />
-  <property name="wheel_radius"   value="0.09" />
+  <xacro:property name="wheel_offset_x" value="${base_link_size_x*0.5 - 0.042}" />
+  <xacro:property name="wheel_offset_z" value="${base_link_size_z*0.5 - 0.065}" />
+  <xacro:property name="wheel_radius"   value="0.09" />
   
-  <property name="track_width"    value="0.1" />
-  <property name="track_offset_y"    value="0.155" />
+  <xacro:property name="track_width"    value="0.1" />
+  <xacro:property name="track_offset_y"    value="0.155" />
   
-  <property name="flipper_width"    value="0.08" />    
-  <property name="flipper_offset_y"    value="0.245" />
-  <property name="flipper_offset_wheel_axis_x"    value="0.225" />
+  <xacro:property name="flipper_width"    value="0.08" />    
+  <xacro:property name="flipper_offset_y"    value="0.245" />
+  <xacro:property name="flipper_offset_wheel_axis_x"    value="0.225" />
   
   
-  <property name="wheel_length" value="0.02" />
-  <property name="wheel_size_y" value="0.0825" />
+  <xacro:property name="wheel_length" value="0.02" />
+  <xacro:property name="wheel_size_y" value="0.0825" />
   
-  <property name="total_width" value="0.297" />
-  <!--    <property name="wheel_offset_y" value="${(total_width - wheel_size_y) / 2}" />-->
-  <property name="wheel_offset_y" value="0.1697" />
-  <property name="wheel_offset_z_from_base_link" value="-0.0" />
+  <xacro:property name="total_width" value="0.297" />
+  <!--    <xacro:property name="wheel_offset_y" value="${(total_width - wheel_size_y) / 2}" />-->
+  <xacro:property name="wheel_offset_y" value="0.1697" />
+  <xacro:property name="wheel_offset_z_from_base_link" value="-0.0" />
   
-  <property name="ground_clearance" value="0.05" />
+  <xacro:property name="ground_clearance" value="0.05" />
   
-  <property name="top_size_x" value="0.3937" />
-  <property name="top_size_y" value="0.3556" />
-  <property name="top_size_z" value="0.0020" />
+  <xacro:property name="top_size_x" value="0.3937" />
+  <xacro:property name="top_size_y" value="0.3556" />
+  <xacro:property name="top_size_z" value="0.0020" />
   
   
   
@@ -50,7 +50,7 @@
   visual/collision tags.
   -->
   
-  <macro name="track_geom_macro_visual" params="offset_y">
+  <xacro:macro name="track_geom_macro_visual" params="offset_y">
     <visual>
       <origin xyz="${wheel_offset_x} ${offset_y} ${wheel_offset_z}" rpy="${M_PI*0.5} 0 0" />
       <geometry>
@@ -69,9 +69,9 @@
         <box size="${base_link_size_x - wheel_radius} ${track_width} ${wheel_radius*2}" />
       </geometry>
     </visual>
-  </macro>
+  </xacro:macro>
   
-  <macro name="track_geom_macro_collision" params="offset_y">
+  <xacro:macro name="track_geom_macro_collision" params="offset_y">
     <collision>
       <origin xyz="${wheel_offset_x} ${offset_y} ${wheel_offset_z}" rpy="${M_PI*0.5} 0 0" />
       <geometry>
@@ -90,16 +90,16 @@
         <box size="${base_link_size_x - wheel_radius} ${track_width} ${wheel_radius*2}" />
       </geometry>
     </collision>
-  </macro>  
+  </xacro:macro>  
   
-  <macro name="obelix_ugv_macro">
+  <xacro:macro name="obelix_ugv_macro">
     
     <!-- Links and Joints (i.e., the robot) -->
     <link name="base_link">
       
-      <inertial_cuboid_with_pose mass="40" x_length="${base_link_size_x}" y_length="${base_link_size_y}" z_length="${base_link_size_z}" >
+      <xacro:inertial_cuboid_with_pose mass="40" x_length="${base_link_size_x}" y_length="${base_link_size_y}" z_length="${base_link_size_z}" >
         <origin xyz="0 0.0 0.0" rpy="0 0 0" />
-      </inertial_cuboid_with_pose>
+      </xacro:inertial_cuboid_with_pose>
       
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
@@ -116,8 +116,8 @@
         </material>                
       </visual>
       
-      <track_geom_macro_visual offset_y="${ track_offset_y}"/>
-      <track_geom_macro_visual offset_y="${-track_offset_y}"/>        
+      <xacro:track_geom_macro_visual offset_y="${ track_offset_y}"/>
+      <xacro:track_geom_macro_visual offset_y="${-track_offset_y}"/>        
       
       
       <collision>
@@ -130,9 +130,9 @@
         </geometry>            
       </collision>       
       
-      <track_geom_macro_collision offset_y="${ track_offset_y}"/>
-      <track_geom_macro_collision offset_y="${-track_offset_y}"/>
+      <xacro:track_geom_macro_collision offset_y="${ track_offset_y}"/>
+      <xacro:track_geom_macro_collision offset_y="${-track_offset_y}"/>
     </link>
     
-  </macro>
+  </xacro:macro>
 </robot>

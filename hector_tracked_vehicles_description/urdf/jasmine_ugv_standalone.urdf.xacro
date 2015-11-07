@@ -6,7 +6,7 @@
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
     
     <!-- Included URDF Files -->
-    <include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_base.urdf.xacro" />
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_base.urdf.xacro" />
     
-    <jasmine_ugv_macro />
+    <xacro:jasmine_ugv_macro />
 </robot>

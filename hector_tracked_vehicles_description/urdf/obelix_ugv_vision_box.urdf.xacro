@@ -11,7 +11,7 @@
     <xacro:include filename="$(find hector_components_description)/urdf/vision_box_common.urdf.xacro"/>
     <xacro:include filename="$(find hector_components_description)/urdf/vision_box_dimensions_hector2.urdf.xacro" />
     
-    <!--<obelix_ugv_macro />-->
+    <!--<xacro:obelix_ugv_macro />-->
     
     <xacro:vision_box parent="base_link" box_type="hector2">
       <origin xyz="-0.05 0 0.11" rpy="0 0 0"/>

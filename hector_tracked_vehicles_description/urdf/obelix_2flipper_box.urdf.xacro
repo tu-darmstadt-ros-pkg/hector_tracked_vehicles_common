@@ -1,20 +1,17 @@
 <?xml version="1.0"?>
 
-<robot
-  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
-  <property name="flipper_base_mass" value="2.0"/>
-  <property name="flipper_x" value="0.3"/>
-  <property name="flipper_y" value="0.1"/>
-  <property name="flipper_z" value="0.15"/>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="flipper_base_mass" value="2.0"/>
+  <xacro:property name="flipper_x" value="0.3"/>
+  <xacro:property name="flipper_y" value="0.1"/>
+  <xacro:property name="flipper_z" value="0.15"/>
   
   <!--
   Note macros below are exact copies of each with expection of the
   visual/collision tags.
   -->
   
-  <macro name="flipper_geom_macro_visual" params="front">
+  <xacro:macro name="flipper_geom_macro_visual" params="front">
     <visual>
       <material name="Grey" >
         <color rgba="0.8 0.8 0.8 1"/>
@@ -36,9 +33,9 @@
         <box size="${flipper_offset_wheel_axis_x} ${flipper_width} ${wheel_radius*2}" />
       </geometry>
     </visual>    
-  </macro>
+  </xacro:macro>
   
-  <macro name="flipper_geom_macro_collision" params="front">
+  <xacro:macro name="flipper_geom_macro_collision" params="front">
     <collision>
       <origin xyz="0 0 0" rpy="${M_PI*0.5} 0 0" />
       <geometry>
@@ -57,15 +54,15 @@
         <box size="${flipper_offset_wheel_axis_x} ${flipper_width} ${wheel_radius*2}" />
       </geometry>
     </collision>
-  </macro>
+  </xacro:macro>
   
   
-  <macro name="obelix_flipper_macro" params="parent name front *origin">
+  <xacro:macro name="obelix_flipper_macro" params="parent name front *origin">
     
     <!-- front is either 1 (for front flipper) or -1 (for back flipper) -->
     <!-- <joint name="${parent}_${name}_flipper_joint" type="fixed">   --> 
     <joint name="${name}_flipper_joint" type="revolute">    
-      <insert_block name="origin"/>
+      <xacro:insert_block name="origin"/>
       <axis xyz="0 1 0"/>
       <limit lower="${-90 * M_PI / 180}" upper="${90 * M_PI / 180}"
              effort="20000" velocity="${1.0 * 110 * M_PI / 180}" />
@@ -76,12 +73,12 @@
     
     <link name="left_${name}_flipper_base_link">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <inertial_cuboid_with_pose mass="3" x_length="${flipper_offset_wheel_axis_x}" y_length="${flipper_width}" z_length="${wheel_radius*2}" >
+      <xacro:inertial_cuboid_with_pose mass="3" x_length="${flipper_offset_wheel_axis_x}" y_length="${flipper_width}" z_length="${wheel_radius*2}" >
         <origin xyz="${front*flipper_offset_wheel_axis_x*0.5} 0 0" rpy="0 0 0" />
-      </inertial_cuboid_with_pose>
+      </xacro:inertial_cuboid_with_pose>
       
-      <flipper_geom_macro_visual front="${front}" />
-      <flipper_geom_macro_collision front="${front}" />
+      <xacro:flipper_geom_macro_visual front="${front}" />
+      <xacro:flipper_geom_macro_collision front="${front}" />
       
     </link>    
     
@@ -94,11 +91,11 @@
     
     <link name="right_${name}_flipper_base_link">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <inertial_cuboid_with_pose mass="3" x_length="${flipper_offset_wheel_axis_x}" y_length="${flipper_width}" z_length="${wheel_radius*2}" >
+      <xacro:inertial_cuboid_with_pose mass="3" x_length="${flipper_offset_wheel_axis_x}" y_length="${flipper_width}" z_length="${wheel_radius*2}" >
         <origin xyz="${front*flipper_offset_wheel_axis_x*0.5} 0 0" rpy="0 0 0" />
-      </inertial_cuboid_with_pose>
-      <flipper_geom_macro_visual front="${front}" />
-      <flipper_geom_macro_collision front="${front}" />
+      </xacro:inertial_cuboid_with_pose>
+      <xacro:flipper_geom_macro_visual front="${front}" />
+      <xacro:flipper_geom_macro_collision front="${front}" />
     </link>
     
     <!--Needed for gazebo-->      
@@ -135,5 +132,5 @@
       <maxContacts>1</maxContacts>
     </gazebo>
     
-  </macro>
+  </xacro:macro>
 </robot>

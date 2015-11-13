@@ -1,36 +1,35 @@
 <?xml version="1.0"?>
 
 <robot name="obelix_ugv_sim_wheels"
-    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:xacro="http://www.ros.org/wiki/xacro"
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
     
     <!-- Included URDF Files -->
-    <include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_2flipper_wheel.urdf.xacro" />
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_2flipper_wheel.urdf.xacro" />
 
 
 
 
   <!-- use for 2*2 flippers --> 
-  <obelix_flipper_wheels_macro parent="base_link" name="front" front="1">
+  <xacro:obelix_flipper_wheels_macro parent="base_link" name="front" front="1">
     <origin xyz="${base_size_x*0.5} ${base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y}  0 " rpy="0 0 0"/>
-  </obelix_flipper_wheels_macro > 
+  </xacro:obelix_flipper_wheels_macro > 
 
-  <obelix_flipper_wheels_macro parent="base_link" name="back" front="-1">
+  <xacro:obelix_flipper_wheels_macro parent="base_link" name="back" front="-1">
     <origin xyz="${-base_size_x*0.5} ${(base_size_y*0.5+wheel_offset_y+0.5*wheel_size_y)}  0  " rpy="0 0 0"/>
-  </obelix_flipper_wheels_macro >
+  </xacro:obelix_flipper_wheels_macro >
   
           <!--  Add wheels using the hlugv_wheel macro -->
-        <tracked_wheel parent="base_link" prefix="left_0" offset_x= "0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="left_3" offset_x= "0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="left_4" offset_x= "-0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="right_0" offset_x= "0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="right_1" offset_x= "0.0" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="right_2" offset_x= "-0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="right_3" offset_x= "-0.10550" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
-        <tracked_wheel parent="base_link" prefix="right_4" offset_x= "0.10550" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="left_0" offset_x= "0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="left_3" offset_x= "0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="left_4" offset_x= "-0.10550" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="right_0" offset_x= "0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="right_1" offset_x= "0.0" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="right_2" offset_x= "-0.21100" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="right_3" offset_x= "-0.10550" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
+        <xacro:tracked_wheel parent="base_link" prefix="right_4" offset_x= "0.10550" offset_y = "-${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
         
         <gazebo>
             
@@ -105,7 +104,5 @@
         <gazebo reference="base_link">
             <material>HLUGV/Green</material>
         </gazebo>
-  
 
-  
 </robot>

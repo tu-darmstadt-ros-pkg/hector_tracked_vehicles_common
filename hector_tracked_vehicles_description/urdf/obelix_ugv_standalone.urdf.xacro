@@ -32,7 +32,7 @@
   <gazebo>
     <plugin name="force_based_move_controller" filename="libgazebo_ros_force_based_move.so">
       <commandTopic>/cmd_vel_raw</commandTopic>
-      <odometryTopic>odom</odometryTopic>
+      <odometryTopic>odom_raw</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <odometryRate>20.0</odometryRate>
       <robotBaseFrame>base_link</robotBaseFrame>

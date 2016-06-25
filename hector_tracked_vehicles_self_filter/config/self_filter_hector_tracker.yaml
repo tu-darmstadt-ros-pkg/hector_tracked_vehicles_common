@@ -12,8 +12,8 @@ self_see_links:
 - name: arm_rgbd_link
 - name: arm_thermal_frame
 - name: spin_lidar_link_hokuyo_laser_frame
-- name: stab_laser_roll_link
-- name: stab_laser_frame
+#- name: stab_laser_roll_link
+#- name: stab_laser_frame
 - name: structure_addons_link
 
 

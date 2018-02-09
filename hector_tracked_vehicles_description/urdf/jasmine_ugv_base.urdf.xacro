@@ -5,24 +5,31 @@
     xmlns:interface="http://www.ros.org/wiki/xacro">
     
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
+    <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+  
     
     <!-- Properties (Constants) -->
     <xacro:property name="M_PI" value="3.14159"/>
     
-    <xacro:property name="base_size_x" value="0.380" />
+    <xacro:property name="base_size_x" value="0.255" />
     <xacro:property name="base_size_y" value="0.12" />
-    <xacro:property name="base_size_z" value="0.085" />
+    <xacro:property name="base_size_z" value="0.045" />
     
-    <xacro:property name="wheel_radius_big" value="0.085" />
+    <xacro:property name="wheel_radius_big" value="0.080" />
     <xacro:property name="wheel_length" value="0.02" />
     <xacro:property name="wheel_size_y" value="0.0825" />
-    
+
+    <xacro:property name="track_width" value="0.0825" />    
+
     <xacro:property name="total_width" value="0.297" />
     <!--    <xacro:property name="wheel_offset_y" value="${(total_width - wheel_size_y) / 2}" />-->
     <xacro:property name="wheel_offset_y" value="0.1697" />
     <xacro:property name="wheel_offset_z_from_base_link" value="-0.0" />
     
     <xacro:property name="ground_clearance" value="0.05" />
+
+    <xacro:property name="flipper_offset_x" value="-0.04" />    
+    
     
     <xacro:property name="top_size_x" value="0.3937" />
     <xacro:property name="top_size_y" value="0.3556" />
@@ -61,13 +68,9 @@
         
         <!-- Links and Joints (i.e., the robot) -->
         <link name="base_link">
-            <inertial>
-                <mass value="25.0" />
-                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-                <inertia ixx="0.005" ixy="0.0" ixz="0.0"
-                         iyy="0.005" iyz="0.0" 
-                         izz="0.005" />
-            </inertial>
+          <xacro:inertial_cuboid_with_pose mass="25" x_length="${base_size_x*2}" y_length="${base_size_y*2}" z_length="${base_size_z*2}" >
+            <origin xyz="0 0 0 " rpy="0 0 0" />
+          </xacro:inertial_cuboid_with_pose>
             
             <visual>
                 <origin xyz="0.0 0.0 -0.085" rpy="0 0 0" />
@@ -84,13 +87,57 @@
             <collision>
                 <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+                    <box size="${base_size_x*2} ${base_size_y*2} ${base_size_z*2}" />
                 </geometry>
             </collision>
+            
+            <collision>
+              <origin xyz="${base_size_x+flipper_offset_x} ${-wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${track_width}" radius="${wheel_radius_big}"/>
+              </geometry>
+            </collision>
+      
+            <collision>
+              <origin xyz="${-base_size_x-flipper_offset_x}  ${-wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${track_width}" radius="${wheel_radius_big}"/>
+              </geometry>
+            </collision>      
+      
+            <collision>
+              <origin xyz="0 ${-wheel_offset_y} 0.0" rpy="0 0 0"/>
+              <geometry>
+                <box size="${base_size_x*2+flipper_offset_x*2} ${track_width} ${wheel_radius_big*2}"/>
+              </geometry>
+            </collision> 
+      
+            <collision>
+              <origin xyz="${base_size_x+flipper_offset_x} ${wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${track_width}" radius="${wheel_radius_big}"/>
+              </geometry>
+            </collision>
+      
+            <collision>
+              <origin xyz="${-base_size_x-flipper_offset_x}  ${wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${track_width}" radius="${wheel_radius_big}"/>
+              </geometry>
+            </collision>      
+      
+            <collision>
+              <origin xyz="0 ${wheel_offset_y} 0.0" rpy="0 0 0"/>
+              <geometry>
+                <box size="${base_size_x*2+flipper_offset_x*2} ${track_width} ${wheel_radius_big*2}"/>
+              </geometry>
+            </collision> 
+                        
         </link>
         
         
        <!--	Add wheels using the hlugv_wheel macro -->
+       <!-- Obsolete, replaced by force-based move macro
         <xacro:tracked_wheel parent="base_link" prefix="left_0" offset_x= "0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
         <xacro:tracked_wheel parent="base_link" prefix="left_1" offset_x= "0.0" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link-0.01}" reflect="1" wheel_radius="${wheel_radius_big}"/>
         <xacro:tracked_wheel parent="base_link" prefix="left_2" offset_x= "-0.21100" offset_y = "${wheel_offset_y}" offset_z = "${wheel_offset_z_from_base_link}" reflect="1" wheel_radius="${wheel_radius_big}"/>
@@ -119,6 +166,34 @@
                 <publishOdometryTf>0</publishOdometryTf>
                 <publishOdometryMsg>1</publishOdometryMsg>
         </plugin>
+        
+        </gazebo>
+        -->
+        
+    <gazebo reference="base_link">
+      <mu1>0.0</mu1>
+      <mu2>0.0</mu2>
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <minDepth>0.001</minDepth>
+      <maxVel>1.0</maxVel>
+    </gazebo>
+        
+    <gazebo>
+      <plugin name="force_based_move_controller" filename="libgazebo_ros_force_based_move.so">
+        <commandTopic>/cmd_vel_raw</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <odometryRate>20.0</odometryRate>
+        <robotBaseFrame>base_link</robotBaseFrame>
+        <yaw_velocity_p_gain>50</yaw_velocity_p_gain>
+        <x_velocity_p_gain>50</x_velocity_p_gain>
+        <y_velocity_p_gain>50</y_velocity_p_gain>
+        <publishOdometryTf>1</publishOdometryTf>
+      </plugin>
+    </gazebo>
+        
+        <gazebo>
         
         <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
           <alwaysOn>true</alwaysOn>

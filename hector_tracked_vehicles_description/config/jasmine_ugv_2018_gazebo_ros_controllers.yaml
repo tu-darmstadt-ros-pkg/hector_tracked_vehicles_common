@@ -1,0 +1,63 @@
+spin_lidar_control: 
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  spin_lidar_spin_joint_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: spin_lidar_spin_joint
+    pid: {p: 0.4, i: 0.0, d: 0.0}
+
+    
+sensor_head_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  sensor_head_traj_controller:
+    type: "effort_controllers/JointTrajectoryController"
+    joints:
+      - sensor_head_yaw_joint
+      - sensor_head_pitch_joint
+      #- arm_joint_4
+
+    gains: # Required because we're controlling an effort interface
+      sensor_head_yaw_joint: {p: &kp_sensor_head 40,  d: &kd_sensor_head 2, i: &ki_default 0, i_clamp: &ki__clamp_default 0}
+      sensor_head_pitch_joint: {p: *kp_sensor_head,  d: *kd_sensor_head, i: *ki_default, i_clamp: *ki__clamp_default}
+      #arm_joint_4: {p: 6000      ,  d: *kd_default , i: *ki_default, i_clamp: *ki__clamp_default}
+
+    constraints:
+      goal_time: &goal_time_constraint 4.0
+      stopped_velocity_tolerance: 1.0
+      sensor_head_yaw_joint:
+        goal: &goal_pos_constraint 0.5
+        trajectory: &trajectory_pos_constraint 1.0
+      sensor_head_pitch_joint:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+
+    stop_trajectory_duration: 1.0    
+    
+  #flipper_traj_controller:
+  #    type: "effort_controllers/JointTrajectoryController"
+  #    joints:
+  #      - front_flipper_joint
+  #      - rear_flipper_joint
+
+  #    gains: # Required because we're controlling an effort interface
+  #      front_flipper_joint: {p: 10000,  d: *kd_default, i: *ki_default, i_clamp: *ki__clamp_default}
+  #      rear_flipper_joint: {p: 10000,  d: *kd_default , i: *ki_default, i_clamp: *ki__clamp_default}
+
+  #    constraints:
+  #      goal_time: *goal_time_constraint
+  #      stopped_velocity_tolerance: 1.0
+  #      front_flipper_joint:
+  #        goal: *goal_pos_constraint
+  #        trajectory: *trajectory_pos_constraint
+  #      rear_flipper_joint:
+  #        goal: *goal_pos_constraint
+  #        trajectory: *trajectory_pos_constraint
+
+  #    stop_trajectory_duration: 1.0

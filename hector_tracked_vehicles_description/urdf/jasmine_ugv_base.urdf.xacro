@@ -247,10 +247,11 @@
             
         </gazebo>
         
+        <!--        
         <gazebo reference="base_link">
             <material>HLUGV/Green</material>
         </gazebo>
-        
+        -->
         
     </xacro:macro>
 </robot>

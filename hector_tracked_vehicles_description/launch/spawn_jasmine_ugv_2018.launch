@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+
+<launch>
+    <param name="use_sim_time" value="true" />
+
+    <!-- send the robot XML to param server -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_2018.urdf.xacro'" />
+
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
+      args="-param robot_description
+            -urdf
+            -z 0.7
+            -model robot_description"
+      respawn="false" output="screen" />
+
+    <!-- start robot state publisher -->
+
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen" >
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" type="string" value="" />
+    </node>
+    
+
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find hector_tracked_vehicles_description)/config/jasmine_ugv_2018_gazebo_ros_controllers.yaml" command="load"/>
+
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="sensor_head_control"
+        args="joint_state_controller sensor_head_traj_controller"/>
+
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="spin_lidar_control"
+        args="joint_state_controller spin_lidar_spin_joint_velocity_controller"/>
+
+  
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_sensor_head" args="/sensor_head_control/joint_states /joint_states" />
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_spin_lidar" args="/spin_lidar_control/joint_states /joint_states" />
+
+    <!--Spin up LIDAR-->
+  <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+  respawn="false" output="screen">
+  <remap from="/joint_states" to="/rrbot/joint_states" />
+  </node>-->
+    
+    <!-- 
+    <rosparam file="$(find hlugv_gazebo)/config/sensor_roll_pitch_mount_controller_sim.yaml" command="load" />
+    <node name="hector_sensor_roll_pitch_controller_spawner" pkg="pr2_controller_manager" type="spawner"
+          args="ls_roll_controller
+                ls_pitch_controller"
+          output="screen" />
+          
+          
+    <node pkg="topic_tools" type="throttle" name="imu_throttle" args="messages hlugv_imu 50 hlugv_imu_throttled" />          
+          
+    <node pkg="hector_imu_attitude_to_tf" type="imu_attitude_to_tf_node" name="hector_imu_attitude_to_tf" output="screen">
+      <remap from="imu_topic" to="hlugv_imu_throttled" />
+      <param name="base_frame" type="string" value="base_footprint" />
+      <param name="base_stabilized_frame" type="string" value="base_stabilized" />
+    </node>
+    
+    <node pkg="hector_roll_pitch_stabilizer" type="roll_pitch_stabilizer" name="roll_pitch_stabilizer" output="screen" >
+      <remap from="/desired_roll_angle" to="/ls_roll_controller/command"/>
+      <remap from="/desired_pitch_angle" to="/ls_pitch_controller/command"/>
+      <param name="base_frame" type="string" value="base_link" />
+      <param name="base_stabilized_frame" type="string" value="base_stabilized" />
+      
+    </node>
+    -->
+<!--    <include file="$(find hector_imu_attitude_to_tf)/launch/example.launch" />-->
+
+<!--    <node pkg="fake_localization" type="fake_localization" name="fake_localization" respawn="true" output="screen" >-->
+<!--      <param name="odom_frame_id" value="odom"/>-->
+<!--    </node>-->
+</launch>

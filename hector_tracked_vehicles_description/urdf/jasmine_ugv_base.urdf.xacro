@@ -186,9 +186,9 @@
         <odometryFrame>odom</odometryFrame>
         <odometryRate>20.0</odometryRate>
         <robotBaseFrame>base_link</robotBaseFrame>
-        <yaw_velocity_p_gain>50</yaw_velocity_p_gain>
-        <x_velocity_p_gain>50</x_velocity_p_gain>
-        <y_velocity_p_gain>50</y_velocity_p_gain>
+        <yaw_velocity_p_gain>500</yaw_velocity_p_gain>
+        <x_velocity_p_gain>3000</x_velocity_p_gain>
+        <y_velocity_p_gain>3000</y_velocity_p_gain>
         <publishOdometryTf>1</publishOdometryTf>
       </plugin>
     </gazebo>

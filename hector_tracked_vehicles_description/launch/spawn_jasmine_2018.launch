@@ -12,7 +12,7 @@
     <arg name="spawn_yaw"   default="0.0" />
 
     <!-- send the robot XML to param server -->
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_2018.urdf.xacro'" />
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro'" />
 
     <!-- push robot_description to factory and spawn robot in gazebo -->
     <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
@@ -55,6 +55,12 @@
 
     <!--Spin up LIDAR-->
   <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
+  
+  
+    <!--Nodelet managers for zoom and thermal cam. Started as part of bringup on real robot. See #882 -->
+  <node pkg="nodelet" type="nodelet" name="arm_zoom_cam_nodelet_manager" args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="velodyne_nodelet_manager" args="manager" output="screen" /> 
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

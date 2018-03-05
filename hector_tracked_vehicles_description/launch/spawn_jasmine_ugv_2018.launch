@@ -3,6 +3,13 @@
 
 <launch>
     <param name="use_sim_time" value="true" />
+    
+    <arg name="spawn_x_pos" default="0.5" />
+    <arg name="spawn_y_pos" default="0" />
+    <arg name="spawn_z_pos" default="0.4" />
+    <arg name="spawn_roll" default="0.0" />
+    <arg name="spawn_pitch" default="0.0" />    
+    <arg name="spawn_yaw"   default="0.0" />
 
     <!-- send the robot XML to param server -->
     <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_2018.urdf.xacro'" />
@@ -11,7 +18,12 @@
     <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
       args="-param robot_description
             -urdf
-            -z 0.7
+            -x $(arg spawn_x_pos)
+            -y $(arg spawn_y_pos)
+            -z $(arg spawn_z_pos)
+            -R $(arg spawn_roll)
+            -P $(arg spawn_pitch)  
+            -Y $(arg spawn_yaw)
             -model robot_description"
       respawn="false" output="screen" />
 
@@ -50,30 +62,6 @@
   <remap from="/joint_states" to="/rrbot/joint_states" />
   </node>-->
     
-    <!-- 
-    <rosparam file="$(find hlugv_gazebo)/config/sensor_roll_pitch_mount_controller_sim.yaml" command="load" />
-    <node name="hector_sensor_roll_pitch_controller_spawner" pkg="pr2_controller_manager" type="spawner"
-          args="ls_roll_controller
-                ls_pitch_controller"
-          output="screen" />
-          
-          
-    <node pkg="topic_tools" type="throttle" name="imu_throttle" args="messages hlugv_imu 50 hlugv_imu_throttled" />          
-          
-    <node pkg="hector_imu_attitude_to_tf" type="imu_attitude_to_tf_node" name="hector_imu_attitude_to_tf" output="screen">
-      <remap from="imu_topic" to="hlugv_imu_throttled" />
-      <param name="base_frame" type="string" value="base_footprint" />
-      <param name="base_stabilized_frame" type="string" value="base_stabilized" />
-    </node>
-    
-    <node pkg="hector_roll_pitch_stabilizer" type="roll_pitch_stabilizer" name="roll_pitch_stabilizer" output="screen" >
-      <remap from="/desired_roll_angle" to="/ls_roll_controller/command"/>
-      <remap from="/desired_pitch_angle" to="/ls_pitch_controller/command"/>
-      <param name="base_frame" type="string" value="base_link" />
-      <param name="base_stabilized_frame" type="string" value="base_stabilized" />
-      
-    </node>
-    -->
 <!--    <include file="$(find hector_imu_attitude_to_tf)/launch/example.launch" />-->
 
 <!--    <node pkg="fake_localization" type="fake_localization" name="fake_localization" respawn="true" output="screen" >-->

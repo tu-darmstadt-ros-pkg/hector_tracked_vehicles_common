@@ -1,0 +1,12 @@
+#Self filter for standard ARGOS robot without gripper
+#
+min_sensor_dist: .15
+self_see_default_padding: 0.08
+self_see_default_scale: 1.0
+self_see_links:
+- name: base_link
+- name: arm_therrmal_cam_frame
+- name: arm_rgbd_cam_link
+- name: sensor_head_yaw_link
+
+

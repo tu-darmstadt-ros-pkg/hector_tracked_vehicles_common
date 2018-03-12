@@ -12,7 +12,7 @@
     <arg name="spawn_yaw"   default="0.0" />
 
     <!-- send the robot XML to param server -->
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro'" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro'" />
 
     <!-- push robot_description to factory and spawn robot in gazebo -->
     <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"

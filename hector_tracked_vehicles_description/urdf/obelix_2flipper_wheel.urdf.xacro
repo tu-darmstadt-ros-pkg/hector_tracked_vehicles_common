@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:property name="flipper_base_mass" value="2.0"/>
   <xacro:property name="flipper_x" value="0.4"/>
 <xacro:property name="flipper_y" value="0.1"/>

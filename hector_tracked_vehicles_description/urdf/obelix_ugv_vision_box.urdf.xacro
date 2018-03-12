@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot name="obelix_ugv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="obelix_ugv" xmlns:xacro="http://ros.org/wiki/xacro">
     
     <!-- Included URDF Files -->
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/obelix_ugv_standalone.urdf.xacro" />

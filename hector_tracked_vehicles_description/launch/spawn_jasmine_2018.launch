@@ -29,7 +29,7 @@
 
     <!-- start robot state publisher -->
 
-    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen" >
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
       <param name="publish_frequency" type="double" value="50.0" />
       <param name="tf_prefix" type="string" value="" />
     </node>
@@ -58,10 +58,10 @@
   
   
     <!--Nodelet managers for zoom and thermal cam. Started as part of bringup on real robot. See #882 -->
-  <node pkg="nodelet" type="nodelet" name="arm_zoom_cam_nodelet_manager" args="manager" output="screen"/>
-  <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen"/>
-  <node pkg="nodelet" type="nodelet" name="velodyne_nodelet_manager" args="manager" output="screen" />
-  <node pkg="nodelet" type="nodelet" name="ricoh_theta_nodelet_manager" args="manager" output="screen" />
+  <node pkg="nodelet" type="nodelet" name="arm_zoom_cam_nodelet_manager" args="manager" output="screen" respawn="true"/>
+  <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen" respawn="true"/>
+  <node pkg="nodelet" type="nodelet" name="velodyne_nodelet_manager" args="manager" output="screen" respawn="true"/>
+  <node pkg="nodelet" type="nodelet" name="ricoh_theta_nodelet_manager" args="manager" output="screen" respawn="true"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

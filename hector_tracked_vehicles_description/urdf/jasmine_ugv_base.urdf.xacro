@@ -72,6 +72,7 @@
             <origin xyz="0 0 0 " rpy="0 0 0" />
           </xacro:inertial_cuboid_with_pose>
             
+          
             <visual>
                 <origin xyz="0.0 0.0 -0.085" rpy="0 0 0" />
                 <geometry>
@@ -80,9 +81,23 @@
                 </geometry>
                 <material name="Grey" >
                     <color rgba="0.8 0.8 0.8 1"/>
-                </material>
-                
+                </material>                
             </visual>
+            
+            <!--Optional visualization of detailed mesh-->
+            <!--
+            <visual>
+                <origin xyz="0.0 0.0 -0.049" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://hector_tracked_vehicles_description/meshes/jasmine_ugv/jasmine_2018_chassis_low_poly_velodyne.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="Grey" >
+                    <color rgba="0.8 0.8 0.8 1"/>
+                </material>
+            </visual>
+            -->
+            
+            
             
             <collision>
                 <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />

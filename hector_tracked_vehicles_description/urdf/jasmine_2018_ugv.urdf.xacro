@@ -4,6 +4,7 @@
     
     <!-- Included URDF Files -->
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_base.urdf.xacro" />
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_structure_addons.urdf.xacro" />
     <xacro:include filename="$(find hector_components_description)/urdf/vlp16_mount.urdf.xacro.xml"/>
     <xacro:include filename="$(find hector_components_description)/urdf/tracker_sensor_head.urdf.xacro.xml"/>
     
@@ -21,11 +22,16 @@
     
     <xacro:tracker_sensor_head_macro parent="base_link">
       <origin xyz="${+0.18 } 0.0 ${0.05}" rpy="0.0 -0.0 ${0.0}"/>    
-    </xacro:tracker_sensor_head_macro>    
+    </xacro:tracker_sensor_head_macro>
+
+    <xacro:jasmine_2018_structure_addons_macro parent="base_link">
+     <origin xyz="0 0 0" rpy="0 0 0"/>       
+    </xacro:jasmine_2018_structure_addons_macro>
+        
     
     <xacro:spinning_sensor_mount_macro parent="base_link"  name="spin_lidar" scaling="0.001">
       <!-- the angles are due to ground calibration with tud tracker vlp16 -->
-      <origin xyz="${+0.0 } 0.0 ${0.15}" rpy="0.0052159 -0.00553223 ${M_PI*0.64}"/>
+      <origin xyz="${+0.0 } 0.0 ${0.27}" rpy="0.0052159 -0.00553223 ${M_PI*0.64}"/>
     </xacro:spinning_sensor_mount_macro>
     
     <xacro:include filename="$(find hector_sensors_description)/urdf/ricoh_theta.urdf.xacro"/>

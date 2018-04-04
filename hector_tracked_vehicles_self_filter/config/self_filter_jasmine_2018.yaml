@@ -8,5 +8,6 @@ self_see_links:
 - name: arm_therrmal_cam_frame
 - name: arm_rgbd_cam_link
 - name: sensor_head_yaw_link
+- name: structure_addons_link
 
 

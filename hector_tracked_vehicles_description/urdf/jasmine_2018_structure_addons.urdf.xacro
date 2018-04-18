@@ -3,9 +3,9 @@
   xmlns:xacro="http://ros.org/wiki/xacro" name="argo_tracker_structure_addons">
   <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
   <xacro:include filename="$(find hector_sensors_description)/urdf/hokuyo_utm30lx.urdf.xacro" />
-  <xacro:include filename="$(find argo_tracker_description)/urdf/argo_tracker_$(optenv TRACKER_LIDAR_TYPE dual_hokuyo)_mount.urdf.xacro.xml" />
+  <!--<xacro:include filename="$(find argo_tracker_description)/urdf/argo_tracker_$(optenv TRACKER_LIDAR_TYPE dual_hokuyo)_mount.urdf.xacro.xml" />-->
   <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro" />
-  <xacro:include filename="$(find argo_tracker_description)/urdf/manipulator_arm.urdf.xacro.xml" />
+  <!--<xacro:include filename="$(find argo_tracker_description)/urdf/manipulator_arm.urdf.xacro.xml" />-->
   
   
 <!--  <xacro:arg name="add_self_filter_geom" default="0"/>-->

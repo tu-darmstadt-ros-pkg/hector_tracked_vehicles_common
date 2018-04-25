@@ -12,7 +12,11 @@
       <origin xyz="0.0 0.0 0.09446" rpy="${M_PI*0.250} 0.0 ${M_PI}"/>
     </xacro:property>
     
-    <xacro:jasmine_ugv_macro />
+    <xacro:arg name="add_self_filter_geom" default="false"/>
+    
+    <xacro:jasmine_ugv_macro>
+      <xacro:arg name="add_self_filter_geom_" default="$(arg add_self_filter_geom)"/>
+    </xacro:jasmine_ugv_macro>
     
     <!--    
     <xacro:vision_box parent="base_link" box_type="hector2">

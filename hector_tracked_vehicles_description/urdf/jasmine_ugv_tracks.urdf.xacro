@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<robot
+    xmlns:xacro="http://ros.org/wiki/xacro"
+    xmlns:interface="http://ros.org/wiki/xacro">
+    
+    <xacro:property name="M_PI" value="3.14159"/>
+    
+    <xacro:macro name="jasmine_ugv_tracks" params="t_base_size_x t_base_size_y t_base_size_z t_flipper_offset_x t_wheel_offset_y t_wheel_radius_big t_track_width">
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+                <geometry>
+                    <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*2}" />
+                </geometry>
+            </collision>
+            
+            <collision>
+              <origin xyz="${t_base_size_x+t_flipper_offset_x} ${-t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+              </geometry>
+            </collision>
+      
+            <collision>
+              <origin xyz="${-t_base_size_x-t_flipper_offset_x}  ${-t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+              </geometry>
+            </collision>      
+      
+            <collision>
+              <origin xyz="0 ${-t_wheel_offset_y} 0.0" rpy="0 0 0"/>
+              <geometry>
+                <box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>
+              </geometry>
+            </collision> 
+      
+            <collision>
+              <origin xyz="${t_base_size_x+t_flipper_offset_x} ${t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+              </geometry>
+            </collision>
+      
+            <collision>
+              <origin xyz="${-t_base_size_x-t_flipper_offset_x}  ${t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <geometry>
+                <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+              </geometry>
+            </collision>      
+      
+            <collision>
+              <origin xyz="0 ${t_wheel_offset_y} 0.0" rpy="0 0 0"/>
+              <geometry>
+                <box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>
+              </geometry>
+            </collision> 
+        
+    </xacro:macro>
+</robot>

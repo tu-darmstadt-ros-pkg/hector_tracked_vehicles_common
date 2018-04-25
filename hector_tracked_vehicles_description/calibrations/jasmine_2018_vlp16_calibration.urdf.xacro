@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!-- Manually copied from tracker setup -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="calibration">
+  <origin xyz="0.0 0.0 0.09446" rpy="${M_PI*0.250} 0.0 ${M_PI}"/>
+</robot>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<robot name="taurob_tracker"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+  
+<!--  <xacro:property name="single_lidar_calibration">
+    <xacro:include filename="$(find argo_tracker_description)/calibrations/$(optenv ARGO_ROBOT_TYPE atex_robot)_spinning_single_lidar_calibration.urdf.xacro"/>
+  </xacro:property>
+  
+  <xacro:property name="pitch_lidar_calibration">
+    <xacro:include filename="$(find argo_tracker_description)/calibrations/$(optenv ARGO_ROBOT_TYPE atex_robot)_spinning_pitch_lidar_calibration.urdf.xacro"/>
+  </xacro:property>
+  
+  <xacro:property name="vertical_lidar_calibration">
+    <xacro:include filename="$(find argo_tracker_description)/calibrations/$(optenv ARGO_ROBOT_TYPE atex_robot)_spinning_vertical_lidar_calibration.urdf.xacro"/>
+  </xacro:property>-->
+
+  <xacro:property name="vlp16_calibration">
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/calibrations/jasmine_2018_vlp16_calibration.urdf.xacro"/>
+  </xacro:property>
+  
+</robot>

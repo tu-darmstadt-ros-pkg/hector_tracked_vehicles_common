@@ -40,12 +40,12 @@
   <rosparam file="$(find hector_tracked_vehicles_description)/config/jasmine_ugv_2018_gazebo_ros_controllers.yaml" command="load"/>
 
 
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
         output="screen" ns="sensor_head_control"
         args="joint_state_controller sensor_head_traj_controller"/>
 
   
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
         output="screen" ns="spin_lidar_control"
         args="joint_state_controller spin_lidar_spin_joint_velocity_controller"/>
 
@@ -59,7 +59,10 @@
   
     <!--Nodelet managers for zoom and thermal cam. Started as part of bringup on real robot. See #882 -->
   <node pkg="nodelet" type="nodelet" name="arm_zoom_cam_nodelet_manager" args="manager" output="screen" respawn="true"/>
-  <node pkg="nodelet" type="nodelet" name="arm_rgbd_cam_nodelet_manager" args="manager" output="screen" respawn="true"/>  
+  
+  <group ns="arm_rgbd_cam">
+    <node pkg="nodelet" type="nodelet" name="arm_rgbd_cam_nodelet_manager" args="manager" output="screen"/>
+  </group> 
   
   <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen" respawn="true"/>
   <node pkg="nodelet" type="nodelet" name="velodyne_nodelet_manager" args="manager" output="screen" respawn="true"/>

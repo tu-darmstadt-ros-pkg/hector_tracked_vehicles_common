@@ -39,7 +39,7 @@
     
     <xacro:spinning_sensor_mount_macro parent="base_link"  name="spin_lidar" scaling="0.001">
       <!-- the angles are due to ground calibration with tud tracker vlp16 -->
-      <origin xyz="${+0.0 } 0.0 ${0.27}" rpy="0.0 0.0 0"/>
+      <origin xyz="${+0.0 } 0.0 ${0.27 + 0.0944673}" rpy="0.0 0.0 0"/>
     </xacro:spinning_sensor_mount_macro>
     
     <xacro:include filename="$(find hector_sensors_description)/urdf/ricoh_theta.urdf.xacro"/>

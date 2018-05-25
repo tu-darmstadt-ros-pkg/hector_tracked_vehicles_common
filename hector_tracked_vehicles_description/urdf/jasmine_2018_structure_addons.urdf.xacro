@@ -32,6 +32,12 @@
       <child link="structure_addons_link"/>      
     </joint>
     
+     <joint name="imu_link_joint" type="fixed">
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <parent link="${parent}" />
+      <child link="imu_link"/>      
+    </joint>
+    
     <link name="structure_addons_link">
       <xacro:inertial_sphere mass="0.1" diameter="0.07"/>
       
@@ -265,6 +271,10 @@
         </material>  
       </collision>
       
+    </link>
+    
+    <link name="imu_link">
+        
     </link>
     
     <gazebo reference="structure_addons_link">

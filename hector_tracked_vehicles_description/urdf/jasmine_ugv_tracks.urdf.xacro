@@ -9,14 +9,29 @@
     <xacro:macro name="jasmine_ugv_tracks" params="t_base_size_x t_base_size_y t_base_size_z t_flipper_offset_x t_wheel_offset_y t_wheel_radius_big t_track_width">
         
             <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
+            <xacro:arg name="add_containment_self_filter_geom" default="false"/>
             
             <xacro:unless value="$(arg add_raycast_self_filter_geom)">
-              <collision>  
-                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-                <geometry>
-                  <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*2}" />
-                </geometry>
-              </collision>
+               
+              <!--Make base geom larger for containment filter-->  
+              <xacro:unless value="$(arg add_containment_self_filter_geom)">  
+                <collision>  
+                  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+                  <geometry>
+                    <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*2}" />
+                  </geometry>
+                </collision>
+              </xacro:unless>
+              
+              <xacro:if value="$(arg add_containment_self_filter_geom)">  
+                <collision>  
+                  <origin xyz="0.0 0.0 ${t_base_size_z*2}" rpy="0 0 0" />
+                  <geometry>
+                    <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*4}" />
+                  </geometry>
+                </collision>
+              </xacro:if>
+              <!--/Make base geom larger for containment filter-->  
               
               <collision>
                 <origin xyz="0 ${-t_wheel_offset_y} 0.0" rpy="0 0 0"/>

@@ -9,7 +9,7 @@
     <xacro:include filename="$(find hector_components_description)/urdf/tracker_sensor_head.urdf.xacro.xml"/>
     
     <xacro:include filename="$(find hector_tracked_vehicles_description)/calibrations/spin_lidar_calibration.urdf.xacro"/>
-    
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv_arm.urdf.xacro" />
     <!--
     <xacro:property name="vlp16_calibration">
       <origin xyz="0.0 0.0 0.09446" rpy="${M_PI*0.250} 0.0 ${M_PI}"/>
@@ -27,6 +27,10 @@
       <origin xyz="-0.05 0 0.11" rpy="0 0 0"/>
     </xacro:vision_box>
     -->
+    
+    <xacro:manipulator_arm_macro parent="base_link">
+      <origin xyz="-0.1618 -0.06875 0.01315" rpy="0.0 0.0 ${M_PI/2}" />
+    </xacro:manipulator_arm_macro>
     
     <xacro:tracker_sensor_head_macro parent="base_link">
       <origin xyz="${+0.18 } 0.04 ${0.05}" rpy="0.0 -0.0 ${0.0}"/>    

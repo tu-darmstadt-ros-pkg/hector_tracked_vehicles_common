@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="load_gazebo_ros_control" default="False" />
+  
+  <xacro:arg name="robot_name" default="jasmine_ugv" />
+
+
+  <transmission name="arm_yaw_joint_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_yaw_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_yaw_joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="arm_pitch_joint_1_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_pitch_joint_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_pitch_joint_1_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="arm_pitch_joint_2_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_pitch_joint_2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_pitch_joint_2_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="arm_pitch_joint_3_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_pitch_joint_3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_pitch_joint_3_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <transmission name="arm_roll_joint_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_roll_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_roll_joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="gripper_servo_joint_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_servo_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_servo_joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <gazebo>
+    <plugin name="gazebo_ros_control_select_joints" filename="libgazebo_ros_control_select_joints.so">
+      <robotNamespace>manipulator_arm_control</robotNamespace>
+      <joints>arm_yaw_joint arm_pitch_joint_1 arm_pitch_joint_2 arm_pitch_joint_3 arm_roll_joint gripper_servo_joint</joints>
+    </plugin>
+  </gazebo>
+  
+  <gazebo>
+    <plugin name="mimic_gripper_finger_joint_1" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+      <joint>gripper_servo_joint</joint>
+      <mimicJoint>gripper_finger_joint_1</mimicJoint>
+      <multiplier>${8/23}</multiplier>
+      <offset>0</offset>
+    <maxEffort>4</maxEffort>
+      <hasPID/>
+    </plugin>
+  </gazebo>
+  
+  <gazebo>
+    <plugin name="mimic_gripper_finger_joint_2" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+      <joint>gripper_servo_joint</joint>
+      <mimicJoint>gripper_finger_joint_2</mimicJoint>
+      <multiplier>${8/23}</multiplier>
+      <offset>0</offset>
+      <maxEffort>4</maxEffort>
+      <hasPID/>
+    </plugin>
+  </gazebo>
+
+<!--  <gazebo>
+    <plugin name="gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
+      <arm>
+        <arm_name>manipulator_arm</arm_name>
+        <palm_link>gripper_palm_link</palm_link>
+        <gripper_link>gripper_finger_link_1</gripper_link>
+        <gripper_link>gripper_finger_link_2</gripper_link>
+      </arm>
+      <forces_angle_tolerance>120</forces_angle_tolerance>
+      <update_rate>5</update_rate>
+      <grip_count_threshold>2</grip_count_threshold>
+      <max_grip_count>8</max_grip_count>
+      <release_tolerance>0.005</release_tolerance>
+      <disable_collisions_on_attach>false</disable_collisions_on_attach>
+      <contact_topic>__default_topic__</contact_topic>
+    </plugin>
+  </gazebo>-->
+
+  <gazebo reference="arm_link_0">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm_link_1">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm_link_2">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm_link_3">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm_link_4">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="arm_link_5">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_palm_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_finger_link_1">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_finger_link_2">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="gripper_grasp_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+</robot>

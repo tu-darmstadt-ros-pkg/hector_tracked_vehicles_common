@@ -38,7 +38,14 @@
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find hector_tracked_vehicles_description)/config/jasmine_ugv_2018_gazebo_ros_controllers.yaml" command="load"/>
-
+  
+  <!-- Set the gains used by the mimic joint gazebo plugin  -->
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/p" value="6"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/i" value="0"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/d" value="0.001"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_2/p" value="6"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_2/i" value="0"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_2/d" value="0.001"/>
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
         output="screen" ns="sensor_head_control"
@@ -48,10 +55,14 @@
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
         output="screen" ns="spin_lidar_control"
         args="joint_state_controller spin_lidar_spin_joint_velocity_controller"/>
-
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
+        output="screen" ns="manipulator_arm_control"
+        args="joint_state_controller manipulator_arm_traj_controller"/>
   
   <node pkg="topic_tools" type="relay" name="relay_joint_states_sensor_head" args="/sensor_head_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_spin_lidar" args="/spin_lidar_control/joint_states /joint_states" />
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_manipulator_arm" args="/manipulator_arm_control/joint_states /joint_states" />
 
     <!--Spin up LIDAR-->
   <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />

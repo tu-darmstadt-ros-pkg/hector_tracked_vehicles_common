@@ -40,6 +40,31 @@ sensor_head_control:
 
     stop_trajectory_duration: 1.0    
     
+manipulator_arm_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  manipulator_arm_traj_controller:
+    type: "effort_controllers/JointTrajectoryController"
+    joints:
+      - arm_yaw_joint
+      - arm_pitch_joint_1
+      - arm_pitch_joint_2
+      - arm_pitch_joint_3 
+      - arm_roll_joint
+      - gripper_servo_joint
+      
+    gains: # Required because we're controlling an effort interface
+      arm_yaw_joint: {p: &kp_manipulator_arm 40,  d: &kd_manipulator_arm 0, i: &ki_manipulator_arm 0, i_clamp: &ki_clamp_manipulator_arm 0}
+      arm_pitch_joint_1: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
+      arm_pitch_joint_2: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
+      arm_pitch_joint_3: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
+      arm_roll_joint: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
+      gripper_servo_joint: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
+    
+    
   #flipper_traj_controller:
   #    type: "effort_controllers/JointTrajectoryController"
   #    joints:

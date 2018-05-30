@@ -5,9 +5,7 @@ self_see_default_padding: 0.0
 self_see_default_scale: 1.0
 self_see_links:
 - name: base_link
-- name: arm_thermal_cam_frame
-- name: arm_rgbd_cam_link
-- name: sensor_head_yaw_link
+- name: sensor_head_mount_link
 - name: structure_addons_link
 
 

@@ -24,7 +24,9 @@
   <xacro:property name="handle_y" value="0.138"/>  
     
   
-  <xacro:macro name="jasmine_2018_structure_addons_macro" params="parent *origin">
+  <xacro:macro name="jasmine_2018_structure_addons_macro" params="parent *origin alu_profile_collision_size_factor">
+      
+    <xacro:arg name="add_containment_self_filter_geom" default="false"/>
       
     <joint name="structure_addon_joint" type="fixed">
       <xacro:insert_block name="origin"/>
@@ -135,6 +137,7 @@
       </visual>     
       
       <!--Handles-->
+      <!--     
       <visual>
         <origin xyz="0 ${ (computer_box_width/2+handle_width/2)} ${handle_y}" rpy="0 0 0"/>
         <geometry>
@@ -154,10 +157,11 @@
           <color rgba="0.5 0.5 0.5 1"/>
         </material>  
       </visual>
-      
+      -->
       
       
       <!-- Computer box-->
+      <xacro:unless value="$(arg add_containment_self_filter_geom)">
       <collision>
         <origin xyz="0 0 ${computer_box_height/2}" rpy="0 0 0"/>
         <geometry>
@@ -172,7 +176,8 @@
       <collision>
         <origin xyz="${ (computer_box_length/2-alu_profile_side_length/2)} ${ (computer_box_width/2-alu_profile_side_length/2)} ${computer_box_height/2 + top_protection_bottom/2}" rpy="0 0 0"/>
         <geometry>
-          <box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>
+          <!--<box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>-->
+          <cylinder length="${top_protection_bottom-computer_box_height}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -182,7 +187,8 @@
       <collision>
         <origin xyz="${-(computer_box_length/2-alu_profile_side_length/2)} ${ (computer_box_width/2-alu_profile_side_length/2)} ${computer_box_height/2 + top_protection_bottom/2}" rpy="0 0 0"/>
         <geometry>
-          <box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>
+          <!--<box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>-->
+          <cylinder length="${top_protection_bottom-computer_box_height}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -192,7 +198,8 @@
       <collision>
         <origin xyz="${-(computer_box_length/2-alu_profile_side_length/2)} ${-(computer_box_width/2-alu_profile_side_length/2)} ${computer_box_height/2 + top_protection_bottom/2}" rpy="0 0 0"/>
         <geometry>
-          <box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>
+          <!--<box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>-->
+          <cylinder length="${top_protection_bottom-computer_box_height}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -202,7 +209,8 @@
       <collision>
         <origin xyz="${ (computer_box_length/2-alu_profile_side_length/2)} ${-(computer_box_width/2-alu_profile_side_length/2)} ${computer_box_height/2 + top_protection_bottom/2}" rpy="0 0 0"/>
         <geometry>
-          <box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>
+          <!--<box size="${alu_profile_side_length} ${alu_profile_side_length} ${top_protection_bottom-computer_box_height}"/>-->
+          <cylinder length="${top_protection_bottom-computer_box_height}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>  
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -211,9 +219,10 @@
       
       <!--Top geom-->      
       <collision>
-        <origin xyz="0 ${ (computer_box_width/2-alu_profile_side_length/2)} ${top_protection_bottom + alu_profile_side_length/2}" rpy="0 0 0"/>
+        <origin xyz="0 ${ (computer_box_width/2-alu_profile_side_length/2)} ${top_protection_bottom + alu_profile_side_length/2}" rpy="0 ${M_PI*0.5} 0"/>
         <geometry>
-          <box size="${computer_box_length} ${alu_profile_side_length} ${alu_profile_side_length}"/>
+          <!--<box size="${computer_box_length} ${alu_profile_side_length} ${alu_profile_side_length}"/>-->
+          <cylinder length="${computer_box_length}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>             
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -221,9 +230,10 @@
       </collision>
       
       <collision>
-        <origin xyz="0 ${-(computer_box_width/2-alu_profile_side_length/2)} ${top_protection_bottom + alu_profile_side_length/2}" rpy="0 0 0"/>
+        <origin xyz="0 ${-(computer_box_width/2-alu_profile_side_length/2)} ${top_protection_bottom + alu_profile_side_length/2}" rpy="0 ${M_PI*0.5} 0"/>
         <geometry>
-          <box size="${computer_box_length} ${alu_profile_side_length} ${alu_profile_side_length}"/>
+          <!--<box size="${computer_box_length} ${alu_profile_side_length} ${alu_profile_side_length}"/>-->
+          <cylinder length="${computer_box_length}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -231,9 +241,10 @@
       </collision>
 
       <collision>
-        <origin xyz="${ (computer_box_length/2-alu_profile_side_length/2)} 0 ${top_protection_bottom + alu_profile_side_length/2}" rpy="0 0 0"/>
+        <origin xyz="${ (computer_box_length/2-alu_profile_side_length/2)} 0 ${top_protection_bottom + alu_profile_side_length/2}" rpy="${M_PI*0.5} ${M_PI*0.5} 0"/>
         <geometry>
-          <box size="${alu_profile_side_length} ${computer_box_width}  ${alu_profile_side_length}"/>
+          <!--<box size="${alu_profile_side_length} ${computer_box_width}  ${alu_profile_side_length}"/>-->
+          <cylinder length="${computer_box_width}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>  
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -241,9 +252,10 @@
       </collision>
       
       <collision>
-        <origin xyz="${-(computer_box_length/2-alu_profile_side_length/2)} 0 ${top_protection_bottom + alu_profile_side_length/2}" rpy="0 0 0"/>
+        <origin xyz="${-(computer_box_length/2-alu_profile_side_length/2)} 0 ${top_protection_bottom + alu_profile_side_length/2}" rpy="${M_PI*0.5} ${M_PI*0.5} 0"/>
         <geometry>
-          <box size="${alu_profile_side_length} ${computer_box_width}  ${alu_profile_side_length}"/>
+          <!--<box size="${alu_profile_side_length} ${computer_box_width}  ${alu_profile_side_length}"/>-->
+          <cylinder length="${computer_box_width}" radius="${alu_profile_side_length*0.5*alu_profile_collision_size_factor}"/>
         </geometry>
         <material name="Grey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -251,6 +263,7 @@
       </collision>     
       
       <!--Handles-->
+      <!--     
       <collision>
         <origin xyz="0 ${ (computer_box_width/2+handle_width/2)} ${handle_y}" rpy="0 0 0"/>
         <geometry>
@@ -270,11 +283,25 @@
           <color rgba="0.5 0.5 0.5 1"/>
         </material>  
       </collision>
+      -->
       
+      </xacro:unless>
+      
+      
+      <xacro:if value="$(arg add_containment_self_filter_geom)">
+      <collision>
+        <origin xyz="0 0 ${computer_box_height/2 + top_protection_bottom/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${computer_box_length} ${computer_box_width} ${top_protection_bottom}"/>
+        </geometry>
+        <material name="Grey">
+          <color rgba="0.5 0.5 0.5 1"/>
+        </material> 
+      </collision>
+      </xacro:if>
     </link>
     
-    <link name="imu_link">
-        
+    <link name="imu_link">        
     </link>
     
     <gazebo reference="structure_addons_link">

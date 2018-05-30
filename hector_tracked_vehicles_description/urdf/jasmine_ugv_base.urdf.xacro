@@ -38,7 +38,9 @@
       
     <xacro:macro name="jasmine_ugv_macro">
         
-        <xacro:arg name="add_self_filter_geom" default="false"/>
+        <xacro:arg name="add_default_geom" default="true"/>
+        <xacro:arg name="add_containment_self_filter_geom" default="false"/>
+        <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
         
         <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
              navigation stack depends on this frame -->
@@ -100,24 +102,34 @@
                 </material>
             </visual>
             -->
-            <xacro:unless value="$(arg add_self_filter_geom)">
+            <xacro:if value="$(arg add_default_geom)">
               <xacro:jasmine_ugv_tracks t_base_size_x="${base_size_x}"  t_base_size_y="${base_size_y}" t_base_size_z="${base_size_z}" t_flipper_offset_x="${flipper_offset_x}" t_wheel_offset_y="${wheel_offset_y}" t_wheel_radius_big="${wheel_radius_big}" t_track_width="${track_width}">
               </xacro:jasmine_ugv_tracks>
-            </xacro:unless>
+            </xacro:if>
             
             <!--Make tracks larger for self filtering-->
-            <xacro:if value="$(arg add_self_filter_geom)">
+            <xacro:if value="$(arg add_containment_self_filter_geom)">
               <xacro:jasmine_ugv_tracks t_base_size_x="${base_size_x}"  t_base_size_y="${base_size_y}" t_base_size_z="${base_size_z}" t_flipper_offset_x="${flipper_offset_x}" t_wheel_offset_y="${wheel_offset_y}" t_wheel_radius_big="${wheel_radius_big*1.3}" t_track_width="${track_width}">
               </xacro:jasmine_ugv_tracks>
               
+              <!--         
               <collision>
                 <origin xyz="0.2 0.04 0.15" rpy="0 0 0" />
                 <geometry>
                     <box size="${0.1} ${0.2} ${0.15}" />
                 </geometry>
               </collision>
-            
+              -->
             </xacro:if>
+            
+            <!--Make tracks larger for self filtering-->
+            <xacro:if value="$(arg add_raycast_self_filter_geom)">
+              <xacro:jasmine_ugv_tracks t_base_size_x="${base_size_x}"  t_base_size_y="${base_size_y}" t_base_size_z="${base_size_z}" t_flipper_offset_x="${flipper_offset_x}" t_wheel_offset_y="${wheel_offset_y}" t_wheel_radius_big="${wheel_radius_big*1.3}" t_track_width="${track_width}">
+                  <xacro:arg name="use_cylinder_geoms" default="$(arg add_containment_self_filter_geom)"/>
+              </xacro:jasmine_ugv_tracks>
+              
+            </xacro:if>
+            
                         
         </link>
         

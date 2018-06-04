@@ -18,13 +18,13 @@
   <xacro:property name="joint_friction" value="0.5" />
   
   <xacro:macro name="manipulator_arm_macro" params="parent *origin">
-    <joint name="arm_base" type="fixed">
+    <joint name="arm_base_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}" />
-      <child link="arm_link_0" />
+      <child link="arm_base_link" />
     </joint>
 
-    <link name="arm_link_0">
+    <link name="arm_base_link">
       <visual>
         <origin xyz="0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -55,12 +55,12 @@
       <origin xyz="0.0 0 0.036" rpy="0.0 0.0 ${pi}" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi+0.001}" upper="${pi-0.001}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
-      <parent link="arm_link_0" />
-      <child link="arm_link_1" />
+      <parent link="arm_base_link" />
+      <child link="arm_yaw_link" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
 
-    <link name="arm_link_1">
+    <link name="arm_yaw_link">
       <visual>
         <origin xyz="0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -87,16 +87,16 @@
       </inertial>
     </link>
 
-    <joint name="arm_pitch_joint_1" type="revolute">
+    <joint name="arm_pitch_joint_0" type="revolute">
       <origin xyz="0.0 0.0 0.0515" rpy=" ${pi/2} 0.0 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-100 * pi / 180}" upper="${100 * pi / 180}" effort="${XM540_W270_max_effort}" velocity="${XM540_W270_max_velocity}" />
-      <parent link="arm_link_1" />
-      <child link="arm_link_2" />
+      <parent link="arm_yaw_link" />
+      <child link="arm_pitch_link_0" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
 
-    <link name="arm_link_2">
+    <link name="arm_pitch_link_0">
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -144,16 +144,16 @@
       </inertial>
     </link>
 
-    <joint name="arm_pitch_joint_2" type="revolute">
+    <joint name="arm_pitch_joint_1" type="revolute">
       <origin xyz="0.026 0.2517 0.0" rpy="0.0 0.0 ${-pi/2}" />
       <axis xyz="0 0 1" />
       <limit lower="${-180 * pi / 180}" upper="${25 * pi / 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
-      <parent link="arm_link_2" />
-      <child link="arm_link_3" />
+      <parent link="arm_pitch_link_0" />
+      <child link="arm_pitch_link_1" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
 
-    <link name="arm_link_3">
+    <link name="arm_pitch_link_1">
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -200,16 +200,16 @@
       </inertial>
     </link>
 
-    <joint name="arm_pitch_joint_3" type="revolute">
+    <joint name="arm_pitch_joint_2" type="revolute">
       <origin xyz="-0.1967 -0.004 0.0" rpy="0.0 0.0 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-95 * pi / 180}" upper="${95 * pi / 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
-      <parent link="arm_link_3" />
-      <child link="arm_link_4" />
+      <parent link="arm_pitch_link_1" />
+      <child link="arm_pitch_link_2" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
     
-    <link name="arm_link_4">
+    <link name="arm_pitch_link_2">
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -253,12 +253,12 @@
       <origin xyz="-0.073 0.0 -0.012" rpy="0 ${-pi/2} 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-95 * pi / 180}" upper="${95 * pi / 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
-      <parent link="arm_link_4" />
-      <child link="arm_link_5" />
+      <parent link="arm_pitch_link_2" />
+      <child link="arm_roll_link" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
     
-    <link name="arm_link_5">
+    <link name="arm_roll_link">
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -301,7 +301,7 @@
 
     <joint name="gripper_mount_joint" type="fixed">
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <parent link="arm_link_5" />
+      <parent link="arm_roll_link" />
       <child link="gripper_palm_link" />
     </joint>
     
@@ -425,17 +425,17 @@
     </link>
     
 	  <!-- gripper finger -->
-    <joint name="gripper_finger_joint_1" type="continuous">
+    <joint name="gripper_finger_joint_0" type="continuous">
       <origin xyz="0.0 -0.020125 0.04108" rpy="0.0 ${pi / 2} 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-0.95*pi}" upper="${0.95*pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="gripper_palm_link" />
-      <child link="gripper_finger_link_1" />
+      <child link="gripper_finger_link_0" />
       <mimic joint="gripper_servo_joint" multiplier="${8 / 23}" offset="0" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
     
-    <link name="gripper_finger_link_1">
+    <link name="gripper_finger_link_0">
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -483,17 +483,17 @@
       </inertial>
     </link>
     
-    <joint name="gripper_finger_joint_2" type="continuous">
+    <joint name="gripper_finger_joint_1" type="continuous">
       <origin xyz="0.0 0.020125 0.04108" rpy="0.0 ${pi / 2} ${pi}" />
       <axis xyz="0 0 1" />
       <limit lower="${-0.95*pi}" upper="${0.95*pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="gripper_palm_link" />
-      <child link="gripper_finger_link_2" />
+      <child link="gripper_finger_link_1" />
       <mimic joint="gripper_servo_joint" multiplier="${8 / 23}" offset="0" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
     
-    <link name="gripper_finger_link_2">
+    <link name="gripper_finger_link_1">
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>

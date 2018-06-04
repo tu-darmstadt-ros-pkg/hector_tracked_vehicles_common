@@ -50,16 +50,16 @@ manipulator_arm_control:
     type: "effort_controllers/JointTrajectoryController"
     joints:
       - arm_yaw_joint
+      - arm_pitch_joint_0
       - arm_pitch_joint_1
-      - arm_pitch_joint_2
-      - arm_pitch_joint_3 
+      - arm_pitch_joint_2 
       - arm_roll_joint
       
     gains: # Required because we're controlling an effort interface
       arm_yaw_joint: {p: &kp_manipulator_arm 40,  d: &kd_manipulator_arm 0, i: &ki_manipulator_arm 0, i_clamp: &ki_clamp_manipulator_arm 0}
+      arm_pitch_joint_0: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
       arm_pitch_joint_1: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
       arm_pitch_joint_2: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
-      arm_pitch_joint_3: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
       arm_roll_joint: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
       
 gripper_control:

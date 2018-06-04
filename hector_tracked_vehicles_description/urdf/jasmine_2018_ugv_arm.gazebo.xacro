@@ -17,6 +17,17 @@
     </actuator>
   </transmission>
 
+  <transmission name="arm_pitch_joint_0_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_pitch_joint_0">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_pitch_joint_0_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
   <transmission name="arm_pitch_joint_1_transmission">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="arm_pitch_joint_1">
@@ -34,17 +45,6 @@
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="arm_pitch_joint_2_motor">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-
-  <transmission name="arm_pitch_joint_3_transmission">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="arm_pitch_joint_3">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="arm_pitch_joint_3_motor">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -75,7 +75,7 @@
   <gazebo>
     <plugin name="gazebo_ros_control_select_joints" filename="libgazebo_ros_control_select_joints.so">
       <robotNamespace>manipulator_arm_control</robotNamespace>
-      <joints>arm_yaw_joint arm_pitch_joint_1 arm_pitch_joint_2 arm_pitch_joint_3 arm_roll_joint</joints>
+      <joints>arm_yaw_joint arm_pitch_joint_0 arm_pitch_joint_1 arm_pitch_joint_2 arm_roll_joint</joints>
     </plugin>
   </gazebo>
   
@@ -87,9 +87,9 @@
   </gazebo>
   
   <gazebo>
-    <plugin name="mimic_gripper_finger_joint_1" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+    <plugin name="mimic_gripper_finger_joint_0" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
       <joint>gripper_servo_joint</joint>
-      <mimicJoint>gripper_finger_joint_1</mimicJoint>
+      <mimicJoint>gripper_finger_joint_0</mimicJoint>
       <multiplier>${8/23}</multiplier>
       <offset>0</offset>
     <maxEffort>4</maxEffort>
@@ -98,9 +98,9 @@
   </gazebo>
   
   <gazebo>
-    <plugin name="mimic_gripper_finger_joint_2" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+    <plugin name="mimic_gripper_finger_joint_1" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
       <joint>gripper_servo_joint</joint>
-      <mimicJoint>gripper_finger_joint_2</mimicJoint>
+      <mimicJoint>gripper_finger_joint_1</mimicJoint>
       <multiplier>${8/23}</multiplier>
       <offset>0</offset>
       <maxEffort>4</maxEffort>
@@ -126,31 +126,31 @@
     </plugin>
   </gazebo>-->
 
-  <gazebo reference="arm_link_0">
+  <gazebo reference="arm_base_link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="arm_link_1">
+  <gazebo reference="arm_yaw_link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="arm_link_2">
+  <gazebo reference="arm_pitch_link_0">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="arm_link_3">
+  <gazebo reference="arm_pitch_link_1">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="arm_link_4">
+  <gazebo reference="arm_pitch_link_2">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="arm_link_5">
+  <gazebo reference="arm_roll_link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
   <gazebo reference="gripper_palm_link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="gripper_finger_link_1">
+  <gazebo reference="gripper_finger_link_0">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
-  <gazebo reference="gripper_finger_link_2">
+  <gazebo reference="gripper_finger_link_1">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
   <gazebo reference="gripper_grasp_link">

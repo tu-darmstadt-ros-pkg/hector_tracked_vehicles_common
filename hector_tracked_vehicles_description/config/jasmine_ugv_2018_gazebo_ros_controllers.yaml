@@ -62,6 +62,27 @@ manipulator_arm_control:
       arm_pitch_joint_2: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
       arm_roll_joint: {p: *kp_manipulator_arm,  d: *kd_manipulator_arm, i: *ki_manipulator_arm, i_clamp: *ki_clamp_manipulator_arm}
       
+    constraints:
+      goal_time: *goal_time_constraint
+      stopped_velocity_tolerance: 1.0
+      arm_yaw_joint:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      arm_pitch_joint_0:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      arm_pitch_joint_1:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint      
+      arm_pitch_joint_2:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      arm_roll_joint:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+
+      stop_trajectory_duration: 1.0
+      
 gripper_control:
 
   joint_state_controller:

@@ -147,8 +147,7 @@
     <joint name="arm_pitch_joint_1" type="revolute">
       <origin xyz="0.026 0.2517 0.0" rpy="0.0 0.0 ${-pi}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-pi/2}" upper="${
-             pi/2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-pi/2}" upper="${pi/2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_0" />
       <child link="arm_pitch_link_1" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
@@ -253,7 +252,7 @@
     <joint name="arm_roll_joint" type="revolute">
       <origin xyz="-0.073 0.0 -0.012" rpy="${pi/2} 0.0 ${-pi/2}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-3/4*pi}" upper="${3/4*pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-pi/2}" upper="${pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_2" />
       <child link="arm_roll_link" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
@@ -379,7 +378,7 @@
     <joint name="gripper_servo_joint" type="revolute">
       <origin xyz="0.024 0.01612 0.01625" rpy="${pi/2} 0.0 ${pi / 2}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-190 / 180 * M_PI}" upper="0.0" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-M_PI/2}" upper="${112 * M_PI/ 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="gripper_palm_link" />
       <child link="gripper_servo_link" />
       <dynamics friction="0" damping="0" />
@@ -439,7 +438,7 @@
       <limit lower="${-0.95*pi}" upper="${0.95*pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="gripper_palm_link" />
       <child link="gripper_finger_link_0" />
-      <mimic joint="gripper_servo_joint" multiplier="${8 / 23}" offset="0" />
+      <mimic joint="gripper_servo_joint" multiplier="${-8 / 23}" offset="${-M_PI/2 * 8/23}" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
     
@@ -497,7 +496,7 @@
       <limit lower="${-0.95*pi}" upper="${0.95*pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="gripper_palm_link" />
       <child link="gripper_finger_link_1" />
-      <mimic joint="gripper_servo_joint" multiplier="${8 / 23}" offset="0" />
+      <mimic joint="gripper_servo_joint" multiplier="${-8 / 23}" offset="${-M_PI/2 * 8/23}" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
     </joint>
     

@@ -52,9 +52,9 @@
     </link>
 
     <joint name="arm_yaw_joint" type="revolute">
-      <origin xyz="0.0 0 0.036" rpy="0.0 0.0 ${pi}" />
+      <origin xyz="0.0 0 0.036" rpy="0.0 0.0 ${pi / 2}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-pi+0.001}" upper="${pi-0.001}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_base_link" />
       <child link="arm_yaw_link" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
@@ -90,7 +90,7 @@
     <joint name="arm_pitch_joint_0" type="revolute">
       <origin xyz="0.0 0.0 0.0515" rpy=" ${pi/2} 0.0 0.0" />
       <axis xyz="0 0 1" />
-      <limit lower="${-100 * pi / 180}" upper="${100 * pi / 180}" effort="${XM540_W270_max_effort}" velocity="${XM540_W270_max_velocity}" />
+      <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM540_W270_max_effort}" velocity="${XM540_W270_max_velocity}" />
       <parent link="arm_yaw_link" />
       <child link="arm_pitch_link_0" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
@@ -145,9 +145,10 @@
     </link>
 
     <joint name="arm_pitch_joint_1" type="revolute">
-      <origin xyz="0.026 0.2517 0.0" rpy="0.0 0.0 ${-pi/2}" />
+      <origin xyz="0.026 0.2517 0.0" rpy="0.0 0.0 ${-pi}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-180 * pi / 180}" upper="${25 * pi / 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-pi/2}" upper="${
+             pi/2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_0" />
       <child link="arm_pitch_link_1" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
@@ -203,7 +204,7 @@
     <joint name="arm_pitch_joint_2" type="revolute">
       <origin xyz="-0.1967 -0.004 0.0" rpy="0.0 0.0 0.0" />
       <axis xyz="0 0 1" />
-      <limit lower="${-95 * pi / 180}" upper="${95 * pi / 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_1" />
       <child link="arm_pitch_link_2" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />
@@ -250,9 +251,9 @@
     </link>
         
     <joint name="arm_roll_joint" type="revolute">
-      <origin xyz="-0.073 0.0 -0.012" rpy="0 ${-pi/2} 0.0" />
+      <origin xyz="-0.073 0.0 -0.012" rpy="${pi/2} 0.0 ${-pi/2}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-95 * pi / 180}" upper="${95 * pi / 180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-3/4*pi}" upper="${3/4*pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_2" />
       <child link="arm_roll_link" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />

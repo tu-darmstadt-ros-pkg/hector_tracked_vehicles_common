@@ -82,12 +82,6 @@ manipulator_arm_control:
         trajectory: *trajectory_pos_constraint
 
       stop_trajectory_duration: 1.0
-      
-manipulator_arm_control:
-
-  joint_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50
 
   gripper_traj_controller:
     type: "effort_controllers/JointTrajectoryController"

@@ -58,15 +58,15 @@
   
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
         output="screen" ns="manipulator_arm_control"
-        args="joint_state_controller manipulator_arm_traj_controller"/>
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
+        args="joint_state_controller manipulator_arm_traj_controller gripper_traj_controller"/>
+<!--  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
         output="screen" ns="gripper_control"
-        args="joint_state_controller gripper_traj_controller"/>
+        args="joint_state_controller gripper_traj_controller"/>-->
   
   <node pkg="topic_tools" type="relay" name="relay_joint_states_sensor_head" args="/sensor_head_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_spin_lidar" args="/spin_lidar_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_manipulator_arm" args="/manipulator_arm_control/joint_states /joint_states" />
-  <node pkg="topic_tools" type="relay" name="relay_joint_states_gripper" args="/gripper_control/joint_states /joint_states" />
+<!--   <node pkg="topic_tools" type="relay" name="relay_joint_states_gripper" args="/gripper_control/joint_states /joint_states" /> -->
 
 
     <!--Spin up LIDAR-->

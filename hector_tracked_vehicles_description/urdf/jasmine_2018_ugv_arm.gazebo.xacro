@@ -75,16 +75,16 @@
   <gazebo>
     <plugin name="gazebo_ros_control_select_joints" filename="libgazebo_ros_control_select_joints.so">
       <robotNamespace>manipulator_arm_control</robotNamespace>
-      <joints>arm_yaw_joint arm_pitch_joint_0 arm_pitch_joint_1 arm_pitch_joint_2 arm_roll_joint</joints>
+      <joints>arm_yaw_joint arm_pitch_joint_0 arm_pitch_joint_1 arm_pitch_joint_2 arm_roll_joint gripper_servo_joint</joints>
     </plugin>
   </gazebo>
   
-  <gazebo>
+<!--  <gazebo>
     <plugin name="gazebo_ros_control_select_joints" filename="libgazebo_ros_control_select_joints.so">
       <robotNamespace>gripper_control</robotNamespace>
       <joints>gripper_servo_joint</joints>
     </plugin>
-  </gazebo>
+  </gazebo>-->
   
   <gazebo>
     <plugin name="mimic_gripper_finger_joint_0" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">

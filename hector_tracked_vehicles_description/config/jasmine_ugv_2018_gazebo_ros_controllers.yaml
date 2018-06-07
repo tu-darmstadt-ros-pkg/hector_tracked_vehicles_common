@@ -83,7 +83,7 @@ manipulator_arm_control:
 
       stop_trajectory_duration: 1.0
       
-gripper_control:
+manipulator_arm_control:
 
   joint_state_controller:
     type: joint_state_controller/JointStateController

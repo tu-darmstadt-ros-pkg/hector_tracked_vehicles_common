@@ -252,7 +252,7 @@
     <joint name="arm_roll_joint" type="revolute">
       <origin xyz="-0.073 0.0 -0.012" rpy="${pi/2} 0.0 ${-pi/2}" />
       <axis xyz="0 0 1" />
-      <limit lower="${-pi/2}" upper="${pi}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
+      <limit lower="${-pi}" upper="${162.976*pi/180}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_2" />
       <child link="arm_roll_link" />
       <dynamics friction="${joint_friction}" damping="${joint_damping}" />

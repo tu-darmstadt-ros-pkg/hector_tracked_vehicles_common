@@ -3,7 +3,15 @@
 <launch>
   
   <include file="$(find hector_tracked_vehicles_description)/launch/xacrodisplay_common.launch">
-    <arg name="robot_description" value="$(find xacro)/xacro --inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro"/>  
+      
+    <!--Display default robot model-->  
+    <arg name="robot_description" value="$(find xacro)/xacro --inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro"/>    
+    
+    <!--Display containment filter robot model. Note you have to replace ++ with double dashes -->
+    <!--<arg name="robot_description" value="$(find xacro)/xacro ++inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro  add_default_geom:=false add_containment_self_filter_geom:=true"/>  -->
+    
+    <!--Display raycast filter robot model. Note you have to replace ++ with double dashes-->
+    <!--<arg name="robot_description" value="$(find xacro)/xacro ++inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro  add_default_geom:=false add_raycast_self_filter_geom:=true"/>  -->
   </include>  
   
 </launch>

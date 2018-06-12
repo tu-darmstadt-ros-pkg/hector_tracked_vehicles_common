@@ -90,9 +90,9 @@
     <plugin name="mimic_gripper_finger_joint_0" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
       <joint>gripper_servo_joint</joint>
       <mimicJoint>gripper_finger_joint_0</mimicJoint>
-      <multiplier>${8/23}</multiplier>
-      <offset>0</offset>
-    <maxEffort>4</maxEffort>
+      <multiplier>${-8/23}</multiplier>
+      <offset>${-M_PI/2 * 8/23}</offset>
+    <maxEffort>10</maxEffort>
       <hasPID/>
     </plugin>
   </gazebo>
@@ -101,9 +101,9 @@
     <plugin name="mimic_gripper_finger_joint_1" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
       <joint>gripper_servo_joint</joint>
       <mimicJoint>gripper_finger_joint_1</mimicJoint>
-      <multiplier>${8/23}</multiplier>
-      <offset>0</offset>
-      <maxEffort>4</maxEffort>
+      <multiplier>${-8/23}</multiplier>
+      <offset>${-M_PI/2 * 8/23}</offset>
+      <maxEffort>10</maxEffort>
       <hasPID/>
     </plugin>
   </gazebo>

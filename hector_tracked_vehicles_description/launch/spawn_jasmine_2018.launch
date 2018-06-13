@@ -90,6 +90,11 @@
   <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_depth_optical_frame_pub" args="0 0 0 -1.57 0 -1.57 /arm_rgbd_cam_depth_frame /arm_rgbd_cam_depth_optical_frame" />
   <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_depth__optical_frame_pub" args="0 0 0 -1.57 0 -1.57 /arm_rgbd_cam_depth_frame /arm_rgbd_cam_depth_optical_frame" />
   <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_rgb_optical_frame_pub" args="0 0 0 0 0 0 arm_rgbd_cam_depth_optical_frame arm_rgbd_cam_rgb_optical_frame" />
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_d435_rgb_frame_pub" args="0 0 0 0 0 0  /manipulation_rgbd_cam_link /manipulation_rgbd_cam_rgb_frame" /> 
+  <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_d435_depth_frame_pub" args="0 0 0 0 0 0  /manipulation_rgbd_cam_link /manipulation_rgbd_cam_depth_frame" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_d435_depth_optical_frame_pub" args="0 0 0 -1.571 0 -1.571 /manipulation_rgbd_cam_depth_frame /manipulation_rgbd_cam_depth_optical_frame" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_d435_rgb_optical_frame_pub" args="0 0 0 0 0 0 /manipulation_rgbd_cam_depth_optical_frame /manipulation_rgbd_cam_rgb_optical_frame" />
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

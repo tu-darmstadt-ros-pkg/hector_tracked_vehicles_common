@@ -40,7 +40,7 @@
       <origin xyz="${+0.18 } 0.04 ${0.05}" rpy="0.0 -0.0 ${0.0}"/>    
     </xacro:tracker_sensor_head_macro>
 
-    <xacro:jasmine_2018_structure_addons_macro parent="base_link" alu_profile_collision_size_factor="1.5">
+    <xacro:jasmine_2018_structure_addons_macro parent="base_link" alu_profile_collision_size_factor="2.0">
      <origin xyz="0 0 0" rpy="0 0 0"/>       
     </xacro:jasmine_2018_structure_addons_macro>
         

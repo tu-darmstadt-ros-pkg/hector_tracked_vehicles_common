@@ -6,7 +6,7 @@
     
     <xacro:property name="M_PI" value="3.14159"/>
     
-    <xacro:macro name="jasmine_ugv_tracks" params="t_base_size_x t_base_size_y t_base_size_z t_flipper_offset_x t_wheel_offset_y t_wheel_radius_big t_track_width">
+    <xacro:macro name="jasmine_ugv_tracks" params="t_base_size_x t_base_size_y t_base_size_z t_flipper_offset_x t_wheel_offset_y t_wheel_radius_big t_track_width t_offset_z:=0">
         
             <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
             <xacro:arg name="add_containment_self_filter_geom" default="false"/>
@@ -16,7 +16,7 @@
               <!--Make base geom larger for containment filter-->  
               <xacro:unless value="$(arg add_containment_self_filter_geom)">  
                 <collision>  
-                  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+                  <origin xyz="0.0 0.0 ${t_offset_z}" rpy="0 0 0" />
                   <geometry>
                     <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*2}" />
                   </geometry>
@@ -25,7 +25,7 @@
               
               <xacro:if value="$(arg add_containment_self_filter_geom)">  
                 <collision>  
-                  <origin xyz="0.0 0.0 ${t_base_size_z*2}" rpy="0 0 0" />
+                  <origin xyz="0.0 0.0 ${t_base_size_z*2+t_offset_z}" rpy="0 0 0" />
                   <geometry>
                     <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*4}" />
                   </geometry>
@@ -34,14 +34,14 @@
               <!--/Make base geom larger for containment filter-->  
               
               <collision>
-                <origin xyz="0 ${-t_wheel_offset_y} 0.0" rpy="0 0 0"/>
+                <origin xyz="0 ${-t_wheel_offset_y} ${t_offset_z}" rpy="0 0 0"/>
                 <geometry>
                   <box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>
                 </geometry>
               </collision> 
               
               <collision>
-                <origin xyz="0 ${t_wheel_offset_y} 0.0" rpy="0 0 0"/>
+                <origin xyz="0 ${t_wheel_offset_y} ${t_offset_z}" rpy="0 0 0"/>
                 <geometry>
                   <box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>
                 </geometry>
@@ -50,21 +50,21 @@
                     
             <xacro:if value="$(arg add_raycast_self_filter_geom)">
               <collision>
-                <origin xyz="0.0 0.07 0.0" rpy="0 ${M_PI*0.5} 0" />
+                <origin xyz="0.0 0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
                 <geometry>
                   <cylinder length="${t_base_size_x*2}" radius="${t_base_size_z*1.6}"/>
                 </geometry>
               </collision>
               
               <collision>
-                <origin xyz="0.0 -0.07 0.0" rpy="0 ${M_PI*0.5} 0" />
+                <origin xyz="0.0 -0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
                 <geometry>
                   <cylinder length="${t_base_size_x*2}" radius="${t_base_size_z*1.6}"/>
                 </geometry>
               </collision>
               
               <collision>
-                <origin xyz="0 ${-t_wheel_offset_y} 0.0" rpy="0 ${M_PI*0.5} 0"/>
+                <origin xyz="0 ${-t_wheel_offset_y} ${t_offset_z}" rpy="0 ${M_PI*0.5} 0"/>
                 <geometry>
                   <cylinder length="${t_base_size_x*2}" radius="${t_wheel_radius_big}"/>  
                   <!--<box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>-->
@@ -72,7 +72,7 @@
               </collision> 
               
               <collision>
-                <origin xyz="0 ${t_wheel_offset_y} 0.0" rpy="0 ${M_PI*0.5} 0"/>
+                <origin xyz="0 ${t_wheel_offset_y} ${t_offset_z}" rpy="0 ${M_PI*0.5} 0"/>
                 <geometry>
                   <cylinder length="${t_base_size_x*2}" radius="${t_wheel_radius_big}"/>    
                   <!--<box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>-->
@@ -84,14 +84,14 @@
 
             
             <collision>
-              <origin xyz="${t_base_size_x+t_flipper_offset_x} ${-t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <origin xyz="${t_base_size_x+t_flipper_offset_x} ${-t_wheel_offset_y} ${t_offset_z}" rpy="${M_PI/2} 0 0"/>
               <geometry>
                 <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
               </geometry>
             </collision>
       
             <collision>
-              <origin xyz="${-t_base_size_x-t_flipper_offset_x}  ${-t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <origin xyz="${-t_base_size_x-t_flipper_offset_x}  ${-t_wheel_offset_y} ${t_offset_z}" rpy="${M_PI/2} 0 0"/>
               <geometry>
                 <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
               </geometry>
@@ -100,14 +100,14 @@
 
       
             <collision>
-              <origin xyz="${t_base_size_x+t_flipper_offset_x} ${t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <origin xyz="${t_base_size_x+t_flipper_offset_x} ${t_wheel_offset_y} ${t_offset_z}" rpy="${M_PI/2} 0 0"/>
               <geometry>
                 <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
               </geometry>
             </collision>
       
             <collision>
-              <origin xyz="${-t_base_size_x-t_flipper_offset_x}  ${t_wheel_offset_y} 0.0" rpy="${M_PI/2} 0 0"/>
+              <origin xyz="${-t_base_size_x-t_flipper_offset_x}  ${t_wheel_offset_y} ${t_offset_z}" rpy="${M_PI/2} 0 0"/>
               <geometry>
                 <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
               </geometry>

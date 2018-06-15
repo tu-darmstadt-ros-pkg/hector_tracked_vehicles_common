@@ -82,6 +82,8 @@ manipulator_arm_control:
         trajectory: *trajectory_pos_constraint
 
       stop_trajectory_duration: 1.0
+      
+    allow_partial_joints_goal: True
 
   gripper_traj_controller:
     type: "effort_controllers/JointTrajectoryController"

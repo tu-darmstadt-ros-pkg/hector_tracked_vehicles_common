@@ -550,7 +550,7 @@
     </link>
     
     <xacro:generic_camera name="gripper_cam" parent="gripper_palm_link" ros_topic="/gripper_cam/image_raw" cam_info_topic="/gripper_cam/camera_info" update_rate="15" res_x="640" res_y="480" image_format="R8G8B8" hfov="60">
-      <origin xyz="0 0 0" rpy="${pi} ${-pi/2} ${-pi/2}"/>
+      <origin xyz="0 0 ${0.034 + 0.02}" rpy="${pi} ${-pi/2} ${-pi/2}"/>
     </xacro:generic_camera>
 
  

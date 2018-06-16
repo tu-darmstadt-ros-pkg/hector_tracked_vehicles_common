@@ -7,6 +7,7 @@
   xmlns:xacro="http://ros.org/wiki/xacro">
   
   <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv_arm.gazebo.xacro" />
+  <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro" />
 
   <xacro:property name="XM430_W350_max_effort" value="4.1" />
   <xacro:property name="XM540_W270_max_effort" value="10.6" />
@@ -482,7 +483,7 @@
       </collision>
 
       <inertial>
-        <origin xyz="0.00029 0.05281 0.05788" rpy="0.0 0.0 ${90 * pi / 180}" />
+        <origin xyz="0.0118 -0.03269 0.00029" rpy="0.0 0.0 0.0" />
         <mass value="0.029" />
         <inertia ixx="0.00006267"   ixy="-0.000021787" ixz="-0.000000201"
                                         iyy="0.000044811"  iyz="0.00000006"
@@ -540,15 +541,17 @@
       </collision>
 
       <inertial>
-        <origin xyz="0.00029 0.05281 0.05788" rpy="0.0 0.0 ${90 * pi / 180}" />
+        <origin xyz="0.0118 -0.03269 0.00029" rpy="0.0 0.0 0.0" />
         <mass value="0.029" />
         <inertia ixx="0.00006267"   ixy="-0.000021787" ixz="-0.000000201"
                                         iyy="0.000044811"  iyz="0.00000006"
                                                               izz="0.000065514" />
       </inertial>
     </link>
-
-    <xacro:generic_camera name="gripper_cam" parent="gripper_palm_link" ros_topic="/gripper_cam/image_raw" cam_info_topic="/gripper_cam/camera_info" update_rate="15" res_x="640" res_y="480" image_format="B8G8R8" hfov="60">
+    
+    <xacro:generic_camera name="gripper_cam" parent="gripper_palm_link" ros_topic="/gripper_cam/image_raw" cam_info_topic="/gripper_cam/camera_info" update_rate="15" res_x="640" res_y="480" image_format="R8G8B8" hfov="60">
+      <origin xyz="0 0 0" rpy="${pi} ${-pi/2} ${-pi/2}"/>
+    </xacro:generic_camera>
  
   </xacro:macro>
 </robot>

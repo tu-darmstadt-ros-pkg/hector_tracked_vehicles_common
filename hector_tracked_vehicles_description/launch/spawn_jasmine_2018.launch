@@ -24,6 +24,9 @@
             -R $(arg spawn_roll)
             -P $(arg spawn_pitch)  
             -Y $(arg spawn_yaw)
+            -J arm_yaw_joint 1.57
+            -J arm_pitch_joint_0 1.57
+            -J arm_pitch_joint_1 -1.57
             -model robot_description"
       respawn="false" output="screen" />
 
@@ -40,10 +43,10 @@
   <rosparam file="$(find hector_tracked_vehicles_description)/config/jasmine_ugv_2018_gazebo_ros_controllers.yaml" command="load"/>
   
   <!-- Set the gains used by the mimic joint gazebo plugin  -->
-  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_0/p" value="5"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_0/p" value="2"/>
   <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_0/i" value="0"/>
   <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_0/d" value="0"/>
-  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/p" value="5"/>
+  <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/p" value="2"/>
   <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/i" value="0"/>
   <param name="//gazebo_ros_control/pid_gains/gripper_finger_joint_1/d" value="0"/>
 

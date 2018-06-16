@@ -549,9 +549,27 @@
       </inertial>
     </link>
     
+    <xacro:property name="servo_width" value="0.034" />
+    <xacro:property name="touch_tool_length" value="0.109" />
+    
     <xacro:generic_camera name="gripper_cam" parent="gripper_palm_link" ros_topic="/gripper_cam/image_raw" cam_info_topic="/gripper_cam/camera_info" update_rate="15" res_x="640" res_y="480" image_format="R8G8B8" hfov="60">
-      <origin xyz="0 0 ${0.034 + 0.02}" rpy="${pi} ${-pi/2} ${-pi/2}"/>
+      <origin xyz="0 0 ${servo_width + 0.02}" rpy="${pi} ${-pi/2} ${-pi/2}"/>
     </xacro:generic_camera>
+    
+    <joint name="touch_tool_joint" type="fixed">
+      <origin xyz="0.012 0.0 ${servo_width + touch_tool_length}" rpy="0.0 0.0 0.0"/>
+      <parent link="gripper_palm_link"/>
+      <child link="touch_tool_link"/>  
+    </joint>
+    
+    <link name="touch_tool_link">
+      <visual>
+        <origin xyz="0 0 ${-touch_tool_length/2}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.001" length="${touch_tool_length}"/>
+        </geometry>
+      </visual>
+    </link>
 
  
   </xacro:macro>

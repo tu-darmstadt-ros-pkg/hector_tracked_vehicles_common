@@ -24,14 +24,14 @@
   <xacro:property name="handle_y" value="0.138"/>  
     
   
-  <xacro:macro name="jasmine_2018_structure_addons_macro" params="parent *origin alu_profile_collision_size_factor">
+  <xacro:macro name="jasmine_2018_structure_addons_macro" params="parent *origin alu_profile_collision_size_factor name:='autonomy_box'">
       
     <xacro:arg name="add_containment_self_filter_geom" default="false"/>
       
-    <joint name="structure_addon_joint" type="fixed">
+    <joint name="${name}_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}" />
-      <child link="structure_addons_link"/>      
+      <child link="${name}_link"/>      
     </joint>
     
      <joint name="imu_link_joint" type="fixed">
@@ -40,7 +40,7 @@
       <child link="imu_link"/>      
     </joint>
     
-    <link name="structure_addons_link">
+    <link name="${name}_link">
       <xacro:inertial_sphere mass="0.1" diameter="0.07"/>
       
       <!-- Computer box-->

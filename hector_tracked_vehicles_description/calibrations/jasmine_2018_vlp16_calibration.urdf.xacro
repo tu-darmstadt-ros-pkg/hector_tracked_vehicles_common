@@ -4,6 +4,8 @@
 <!-- |    Insert this transformation between frames spin_lidar_lidar_mount_link and spin_lidar_pitch_hokuyo_laser_frame. | -->
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
+
+<!-- Set to identity transform on 17.09.2018 by MO -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="calibration">
-  <origin xyz="-0.00203613 0.00579971 0.0" rpy="0.789793 -0.00528362 3.14158"/>
+  <origin xyz="0.0 0.0 0.0" rpy="0.7854 0.0 0.0"/>
 </robot>

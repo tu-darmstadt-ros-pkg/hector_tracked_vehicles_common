@@ -8,5 +8,6 @@ self_see_links:
 - name: arm_thermal_cam_frame
 - name: arm_rgbd_cam_link
 - name: structure_addons_link
+- name: autonomy_box_link
 
 

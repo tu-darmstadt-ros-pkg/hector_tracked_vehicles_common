@@ -8,5 +8,6 @@ self_see_links:
 - name: sensor_head_mount_link
 - name: structure_addons_link
 - name: sensor_head_yaw_link
+- name: autonomy_box_link
 
 

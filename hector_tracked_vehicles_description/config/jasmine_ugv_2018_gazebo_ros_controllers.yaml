@@ -24,7 +24,7 @@ sensor_head_control:
       #- arm_joint_4
 
     gains: # Required because we're controlling an effort interface
-      sensor_head_yaw_joint: {p: &kp_sensor_head 40,  d: &kd_sensor_head 0, i: &ki_default 0, i_clamp: &ki__clamp_default 0}
+      sensor_head_yaw_joint: {p: &kp_sensor_head 200,  d: &kd_sensor_head 0, i: &ki_default 0, i_clamp: &ki__clamp_default 0}
       sensor_head_pitch_joint: {p: *kp_sensor_head,  d: *kd_sensor_head, i: *ki_default, i_clamp: *ki__clamp_default}
       #arm_joint_4: {p: 6000      ,  d: *kd_default , i: *ki_default, i_clamp: *ki__clamp_default}
 

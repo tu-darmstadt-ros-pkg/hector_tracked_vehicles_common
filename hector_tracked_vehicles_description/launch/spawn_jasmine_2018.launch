@@ -86,6 +86,7 @@
   <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen" respawn="true"/>
   <node pkg="nodelet" type="nodelet" name="velodyne_nodelet_manager" args="manager" output="screen" respawn="true"/>
   <node pkg="nodelet" type="nodelet" name="ricoh_theta_nodelet_manager" args="manager" output="screen" respawn="true"/>
+  <node pkg="nodelet" type="nodelet" name="camera360_nodelet_manager" args="manager" output="screen" respawn="true"/>
   
     <!--Required as Realsense driver publishes tf directly-->
   <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_rgb_frame_pub" args="0 0 0 0 0 0  /arm_rgbd_cam_link /arm_rgbd_cam_rgb_frame" /> 

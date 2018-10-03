@@ -57,7 +57,7 @@
     
     <xacro:include filename="$(find hector_sensors_description)/urdf/camera360.urdf.xacro"/>
     
-    <xacro:camera360 name="camera360" right_cam_name="right" left_cam_name="left" parent="base_link" dist_between_cameras="-0.03850784" ros_topic="image_raw" update_rate="10" res_x="1504" res_y="1504" image_format="R8G8B8" fov="${M_PI*1.1}">
+    <xacro:camera360 name="camera360" right_cam_name="right" left_cam_name="left" parent="base_link" dist_between_cameras="-0.03850784" ros_topic="image_raw" update_rate="10" res_x="1504" res_y="1504" image_format="R8G8B8" fov="${M_PI}">
       <origin xyz="0.0 0.0 0.58" rpy="0.0 0 0"/> <!-- base_link to camera mount transform -->
       <origin xyz="0.00009742  0.00061696 -0.03850784" rpy="3.1373499 -0.0021358 -3.1279404"/> <!-- cam to cam transform (calibration by kalibr) -->
 <!--       <origin xyz="0.03850784 0 0" rpy="0 0 ${M_PI}"/> -->

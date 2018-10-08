@@ -59,7 +59,7 @@
     </xacro:manipulator_arm_macro>
     
     <xacro:tracker_sensor_head_macro parent="base_link">
-      <origin xyz="${+0.18 } 0.04 ${0.05}" rpy="0.0 -0.0 -0.187273829"/>    
+      <origin xyz="${+0.18 } 0.04 ${0.05}" rpy="0.0 -0.0 ${0.0}"/>    
     </xacro:tracker_sensor_head_macro>
 
     <xacro:jasmine_2018_structure_addons_macro parent="base_link" alu_profile_collision_size_factor="2.0">

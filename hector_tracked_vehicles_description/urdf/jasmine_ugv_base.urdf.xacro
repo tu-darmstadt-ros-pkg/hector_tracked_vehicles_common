@@ -6,6 +6,7 @@
     
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_tracks.urdf.xacro" />
+    <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_base.gazebo.xacro" />
     <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
   
     
@@ -73,54 +74,6 @@
           <origin xyz="0 ${-wheel_offset_y} 0 " rpy="0 0 0" />  
         </xacro:jasmine_ugv_track_link>
             
-            
-        <gazebo reference="base_link">
-          <mu1>0.0</mu1>
-          <mu2>0.0</mu2>
-          <kp>1000000.0</kp>
-          <kd>100.0</kd>
-          <minDepth>0.001</minDepth>
-          <maxVel>1.0</maxVel>
-        </gazebo>
-            
-        <gazebo>
-          <plugin name="force_based_move_controller" filename="libgazebo_ros_force_based_move.so">
-            <commandTopic>/cmd_vel_raw</commandTopic>
-            <odometryTopic>odom</odometryTopic>
-            <odometryFrame>odom</odometryFrame>
-            <odometryRate>20.0</odometryRate>
-            <robotBaseFrame>base_link</robotBaseFrame>
-            <yaw_velocity_p_gain>500</yaw_velocity_p_gain>
-            <x_velocity_p_gain>3000</x_velocity_p_gain>
-            <y_velocity_p_gain>3000</y_velocity_p_gain>
-            <publishOdometryTf>1</publishOdometryTf>
-          </plugin>
-          
-          <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
-            <alwaysOn>true</alwaysOn>
-            <updateRate>50.0</updateRate>
-            <bodyName>base_link</bodyName>
-            <topicName>ground_truth/state</topicName>
-            <gaussianNoise>0.01</gaussianNoise>
-            <frameName>world</frameName>
-            <xyzOffsets>0 0 0</xyzOffsets>
-            <rpyOffsets>0 0 0</rpyOffsets>
-          </plugin>
-
-          <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
-            <alwaysOn>true</alwaysOn>
-            <updateRate>50.0</updateRate>
-            <bodyName>base_link</bodyName>
-            <topicName>imu_quat</topicName>
-            <accelDrift>0.0 0.0 0.0</accelDrift>
-            <accelGaussianNoise>0.1 0.1 0.1</accelGaussianNoise>
-            <rateDrift>0.0 0.0 0.0</rateDrift>
-            <rateGaussianNoise>0.05 0.05 0.05</rateGaussianNoise>
-            <headingDrift>0.0</headingDrift>
-            <headingGaussianNoise>0.05</headingGaussianNoise>
-          </plugin>
-                
-                
-        </gazebo>
+        <xacro:tracked_vehicle_gazebo_plugin tracks_separation="${base_size_y + track_width}"/>
     </xacro:macro>
 </robot>

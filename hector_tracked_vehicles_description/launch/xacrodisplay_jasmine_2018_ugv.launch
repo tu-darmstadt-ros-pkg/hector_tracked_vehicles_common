@@ -2,10 +2,14 @@
 
 <launch>
   
+  <arg name="add_default_geom" default="true"/>
+  <arg name="add_containtment_self_filter_geom" default="false"/>
+  <arg name="add_raycast_self_filter_geom" default="false"/>
+  
   <include file="$(find hector_tracked_vehicles_description)/launch/xacrodisplay_common.launch">
       
     <!--Display default robot model-->  
-    <arg name="robot_description" value="$(find xacro)/xacro --inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro"/>    
+    <arg name="robot_description" value="$(find xacro)/xacro --inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro add_default_geom:=$(arg add_default_geom) add_containment_self_filter_geom:=$(arg add_containtment_self_filter_geom) add_raycast_self_filter_geom:=$(arg add_raycast_self_filter_geom)"/>    
     
     <!--Display containment filter robot model. Note you have to replace ++ with double dashes -->
     <!--<arg name="robot_description" value="$(find xacro)/xacro ++inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro  add_default_geom:=false add_containment_self_filter_geom:=true"/>  -->

@@ -5,6 +5,113 @@
     xmlns:interface="http://ros.org/wiki/xacro">
     
     <xacro:property name="M_PI" value="3.14159"/>
+    
+    <xacro:macro name="jasmine_ugv_chassis_geom" params="t_base_size_x t_base_size_y t_base_size_z t_offset_z:=0">
+      <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
+      <xacro:arg name="add_containment_self_filter_geom" default="false"/>
+      
+      <!-- Non-raycast -->
+      <xacro:unless value="$(arg add_raycast_self_filter_geom)">
+        <xacro:unless value="$(arg add_containment_self_filter_geom)">  
+          <!-- Standard-->
+          <collision>  
+            <origin xyz="0.0 0.0 ${t_offset_z}" rpy="0 0 0" />
+            <geometry>
+              <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*2}" />
+            </geometry>
+          </collision>
+        </xacro:unless>
+        <!--Make base geom larger for containment filter-->  
+        <xacro:if value="$(arg add_containment_self_filter_geom)">  
+          <!-- Containment self filtering-->
+          <collision>  
+            <origin xyz="0.0 0.0 ${t_base_size_z*2+t_offset_z}" rpy="0 0 0" />
+            <geometry>
+              <box size="${t_base_size_x*2} ${t_base_size_y*2} ${t_base_size_z*4}" />
+            </geometry>
+          </collision>
+        </xacro:if>
+      </xacro:unless>
+            
+      <!-- Chassis geometry for raycast self filter -->
+      <!-- Does not use boxes as raycast filtering is broken as of 27.03.2019 -->
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <collision>
+          <origin xyz="0.0 0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
+          <geometry>
+            <cylinder length="${t_base_size_x*2}" radius="${t_base_size_z*1.6}"/>
+          </geometry>
+        </collision>
+        
+        <collision>
+          <origin xyz="0.0 -0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
+          <geometry>
+            <cylinder length="${t_base_size_x*2}" radius="${t_base_size_z*1.6}"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+    </xacro:macro>
+    
+    <xacro:macro name="jasmine_ugv_track_link" params="name parent t_wheel_radius_big t_track_width t_track_length *origin">
+      <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
+      <xacro:arg name="add_containment_self_filter_geom" default="false"/>
+      
+      <joint name="${name}_fixed_joint" type="fixed">
+        <xacro:insert_block name="origin"/>
+        <parent link="${parent}"/>
+        <child link="${name}_link"/>
+      </joint>
+    
+      <link name="${name}_link">
+        <!-- TODO intertial -->
+        <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="2"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/> 
+        </inertial>
+        
+        <!-- Collision geom -->
+        <!-- Non-raycast Track -->
+        <xacro:unless value="$(arg add_raycast_self_filter_geom)">
+          <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+              <box size="${t_track_length} ${t_track_width} ${t_wheel_radius_big*2}"/>
+            </geometry>
+          </collision> 
+        </xacro:unless>
+            
+        <!-- Track geometry for raycast self filter -->
+        <!-- Does not use boxes as raycast filtering is broken as of 27.03.2019 -->
+        <xacro:if value="$(arg add_raycast_self_filter_geom)">             
+          <collision>
+            <origin xyz="0 0 0" rpy="0 ${M_PI*0.5} 0"/>
+            <geometry>
+              <cylinder length="${t_track_length}" radius="${t_wheel_radius_big}"/>    
+              <!--<box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>-->
+            </geometry>
+          </collision>
+        </xacro:if>
+                
+
+        <!-- Front wheel -->   
+        <collision>
+          <origin xyz="${t_track_length / 2.0} 0 0" rpy="${M_PI/2} 0 0"/>
+          <geometry>
+            <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+          </geometry>
+        </collision>
+  
+        <!-- Back wheel -->   
+        <collision>
+          <origin xyz="${-t_track_length / 2.0} 0 0" rpy="${M_PI/2} 0 0"/>
+          <geometry>
+            <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+          </geometry>
+        </collision>
+      </link>
+      
+    </xacro:macro>
         
     <xacro:macro name="jasmine_ugv_tracks" params="t_base_size_x t_base_size_y t_base_size_z t_flipper_offset_x t_wheel_offset_y t_wheel_radius_big t_track_width t_offset_z:=0">
         

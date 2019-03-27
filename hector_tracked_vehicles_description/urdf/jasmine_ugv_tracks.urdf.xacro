@@ -56,6 +56,16 @@
       <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
       <xacro:arg name="add_containment_self_filter_geom" default="false"/>
       
+      <xacro:if value="$(arg add_default_geom)">
+        <xacro:property name="collision_factor" value="1.0" />
+      </xacro:if>
+      <xacro:if value="$(arg add_containment_self_filter_geom)">
+        <xacro:property name="collision_factor" value="1.3" />
+      </xacro:if>
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <xacro:property name="collision_factor" value="1.3" />
+      </xacro:if>
+      
       <joint name="${name}_fixed_joint" type="fixed">
         <xacro:insert_block name="origin"/>
         <parent link="${parent}"/>
@@ -63,18 +73,17 @@
       </joint>
     
       <link name="${name}_link">
-        <!-- TODO intertial -->
-        <xacro:inertial_cuboid_with_pose mass="2" x_length="${t_track_length}" y_length="${t_track_width}" z_length="${t_wheel_radius_big*2}" >
+        <xacro:inertial_cuboid_with_pose mass="5" x_length="${t_track_length}" y_length="${t_track_width}" z_length="${t_wheel_radius_big*2}" >
           <origin xyz="0 0 0 " rpy="0 0 0" />
         </xacro:inertial_cuboid_with_pose>
         
         <!-- Collision geom -->
         <!-- Standard track geom -->
-        <xacro:if value="$(arg add_default_geom)">
+        <xacro:if value="$(eval add_default_geom or add_containment_self_filter_geom)">
           <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-              <box size="${t_track_length} ${t_track_width} ${t_wheel_radius_big*2}"/>
+              <box size="${t_track_length} ${t_track_width} ${collision_factor * t_wheel_radius_big*2}"/>
             </geometry>
           </collision>
         </xacro:if>
@@ -85,7 +94,7 @@
           <collision>
             <origin xyz="0 0 0" rpy="0 ${M_PI*0.5} 0"/>
             <geometry>
-              <cylinder length="${t_track_length}" radius="${t_wheel_radius_big}"/>    
+              <cylinder length="${t_track_length + 0.08}" radius="${collision_factor * t_wheel_radius_big}"/>    
               <!--<box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>-->
             </geometry>
           </collision>
@@ -96,7 +105,7 @@
         <collision>
           <origin xyz="${t_track_length / 2.0} 0 0" rpy="${M_PI/2} 0 0"/>
           <geometry>
-            <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+            <cylinder length="${t_track_width}" radius="${collision_factor * t_wheel_radius_big}"/>
           </geometry>
         </collision>
   
@@ -104,7 +113,7 @@
         <collision>
           <origin xyz="${-t_track_length / 2.0} 0 0" rpy="${M_PI/2} 0 0"/>
           <geometry>
-            <cylinder length="${t_track_width}" radius="${t_wheel_radius_big}"/>
+            <cylinder length="${t_track_width}" radius="${collision_factor * t_wheel_radius_big}"/>
           </geometry>
         </collision>
       </link>

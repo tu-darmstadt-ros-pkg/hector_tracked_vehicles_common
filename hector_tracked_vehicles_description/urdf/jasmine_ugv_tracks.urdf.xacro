@@ -5,16 +5,18 @@
     xmlns:interface="http://ros.org/wiki/xacro">
     
     <xacro:property name="M_PI" value="3.14159"/>
-    
+        
     <xacro:macro name="jasmine_ugv_tracks" params="t_base_size_x t_base_size_y t_base_size_z t_flipper_offset_x t_wheel_offset_y t_wheel_radius_big t_track_width t_offset_z:=0">
         
             <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
             <xacro:arg name="add_containment_self_filter_geom" default="false"/>
             
+            <!-- Non-raycast Chassis + Tracks -->
             <xacro:unless value="$(arg add_raycast_self_filter_geom)">
-               
-              <!--Make base geom larger for containment filter-->  
+              
+              <!-- Chassis -->
               <xacro:unless value="$(arg add_containment_self_filter_geom)">  
+                <!-- Chassis Standard-->
                 <collision>  
                   <origin xyz="0.0 0.0 ${t_offset_z}" rpy="0 0 0" />
                   <geometry>
@@ -22,8 +24,9 @@
                   </geometry>
                 </collision>
               </xacro:unless>
-              
+              <!--Make base geom larger for containment filter-->  
               <xacro:if value="$(arg add_containment_self_filter_geom)">  
+                <!-- Chassis containment self filtering-->
                 <collision>  
                   <origin xyz="0.0 0.0 ${t_base_size_z*2+t_offset_z}" rpy="0 0 0" />
                   <geometry>
@@ -31,8 +34,8 @@
                   </geometry>
                 </collision>
               </xacro:if>
-              <!--/Make base geom larger for containment filter-->  
               
+              <!-- Right track -->
               <collision>
                 <origin xyz="0 ${-t_wheel_offset_y} ${t_offset_z}" rpy="0 0 0"/>
                 <geometry>
@@ -40,6 +43,7 @@
                 </geometry>
               </collision> 
               
+              <!-- Left track -->
               <collision>
                 <origin xyz="0 ${t_wheel_offset_y} ${t_offset_z}" rpy="0 0 0"/>
                 <geometry>
@@ -47,7 +51,9 @@
                 </geometry>
               </collision> 
             </xacro:unless>
-                    
+            
+            <!-- Chassis + Tracks geometry for raycast self filter -->
+            <!-- Does not use boxes as raycast filtering is broken as of 27.03.2019 -->
             <xacro:if value="$(arg add_raycast_self_filter_geom)">
               <collision>
                 <origin xyz="0.0 0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
@@ -77,12 +83,11 @@
                   <cylinder length="${t_base_size_x*2}" radius="${t_wheel_radius_big}"/>    
                   <!--<box size="${t_base_size_x*2+t_flipper_offset_x*2} ${t_track_width} ${t_wheel_radius_big*2}"/>-->
                 </geometry>
-              </collision> 
-              
+              </collision>
             </xacro:if>
                 
 
-            
+            <!-- Four wheels -->
             <collision>
               <origin xyz="${t_base_size_x+t_flipper_offset_x} ${-t_wheel_offset_y} ${t_offset_z}" rpy="${M_PI/2} 0 0"/>
               <geometry>

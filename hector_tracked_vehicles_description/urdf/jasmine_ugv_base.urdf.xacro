@@ -32,8 +32,14 @@
         <xacro:arg name="add_containment_self_filter_geom" default="false"/>
         <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
         
-        <!-- Links and Joints (i.e., the robot) -->
-        <link name="base_link">
+        <link name="base_link"/>
+          
+        <joint name="chassis_joint" type="fixed">
+          <parent link="base_link"/>
+          <child link="chassis_link"/>
+        </joint>
+        
+        <link name="chassis_link">
           <xacro:inertial_cuboid_with_pose mass="10" x_length="${base_size_x*2}" y_length="${base_size_y*2}" z_length="${base_size_z*2}" >
             <origin xyz="0 0 0 " rpy="0 0 0" />
           </xacro:inertial_cuboid_with_pose>
@@ -66,11 +72,11 @@
             <xacro:jasmine_ugv_chassis_geom t_base_size_x="${base_size_x}"  t_base_size_y="${base_size_y}" t_base_size_z="${base_size_z}"/>
         </link>
         
-        <xacro:jasmine_ugv_track_link name="left_track" parent="base_link" t_wheel_radius_big="${wheel_radius_big}" t_track_width="${track_width}" t_track_length="${base_size_x*2+flipper_offset_x*2}">
+        <xacro:jasmine_ugv_track_link name="left_track" parent="chassis_link" t_wheel_radius_big="${wheel_radius_big}" t_track_width="${track_width}" t_track_length="${base_size_x*2+flipper_offset_x*2}">
           <origin xyz="0 ${wheel_offset_y} 0 " rpy="0 0 0" />  
         </xacro:jasmine_ugv_track_link>
         
-        <xacro:jasmine_ugv_track_link name="right_track" parent="base_link" t_wheel_radius_big="${wheel_radius_big}" t_track_width="${track_width}" t_track_length="${base_size_x*2+flipper_offset_x*2}">
+        <xacro:jasmine_ugv_track_link name="right_track" parent="chassis_link" t_wheel_radius_big="${wheel_radius_big}" t_track_width="${track_width}" t_track_length="${base_size_x*2+flipper_offset_x*2}">
           <origin xyz="0 ${-wheel_offset_y} 0 " rpy="0 0 0" />  
         </xacro:jasmine_ugv_track_link>
             

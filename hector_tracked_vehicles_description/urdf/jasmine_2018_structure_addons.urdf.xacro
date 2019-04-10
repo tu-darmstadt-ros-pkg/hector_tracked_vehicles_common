@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <robot
   xmlns:xacro="http://ros.org/wiki/xacro" name="argo_tracker_structure_addons">
-  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
-  <xacro:include filename="$(find hector_sensors_description)/urdf/hokuyo_utm30lx.urdf.xacro" />
-  <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro" />
   
   <xacro:include filename="$(find hector_components_description)/urdf/autonomy_box.urdf.xacro" />
 

@@ -48,12 +48,6 @@
     
     <link name="base_link_front"/>-->
     
-    <!--    
-    <xacro:vision_box parent="base_link" box_type="hector2">
-      <origin xyz="-0.05 0 0.11" rpy="0 0 0"/>
-    </xacro:vision_box>
-    -->
-    
     <xacro:manipulator_arm_macro parent="base_link">
       <origin xyz="-0.1618 -0.06875 0.01315" rpy="0.0 0.0 ${M_PI/2}" />
     </xacro:manipulator_arm_macro>

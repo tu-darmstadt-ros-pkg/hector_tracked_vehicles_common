@@ -65,23 +65,12 @@
     <xacro:jasmine_2018_structure_addons_macro parent="base_link" alu_profile_collision_size_factor="2.0">
      <origin xyz="0 0 0" rpy="0 0 0"/>       
     </xacro:jasmine_2018_structure_addons_macro>
-    
-    <xacro:spinning_sensor_mount_macro parent="base_link"  name="spin_lidar" scaling="0.001">
-      <!-- the angles are due to ground calibration with jasmine (06.10.2018) -->
-      <origin xyz="${+0.0 } 0.0 ${0.27 + 0.0944673}" rpy="-0.00116843 0.00539346 0"/>
-    </xacro:spinning_sensor_mount_macro>
         
     <xacro:realsense_d435_camera_comprehensive_params name="manipulation_rgbd_cam" parent="base_link" image_topic="image_rect_color" depth_points_topic="depth/points" min_range="0.3" max_range="9.0" update_rate="20">
       <origin xyz="-0.08 -0.0085 0.454" rpy="0.0 ${25*M_PI/180.0} ${M_PI}"/>
     </xacro:realsense_d435_camera_comprehensive_params>
-    
-    <xacro:include filename="$(find hector_sensors_description)/urdf/camera360.urdf.xacro"/>
-    
-    <xacro:camera360 name="camera360" right_cam_name="right" left_cam_name="left" parent="base_link" dist_between_cameras="-0.03850784" ros_topic="image_raw" update_rate="10" res_x="1504" res_y="1504" image_format="R8G8B8" fov="${M_PI}">
-      <origin xyz="0.0 0.0 0.59" rpy="0.0 0.01 -0.04"/> <!-- base_link to camera mount transform -->
-      <origin xyz="0.00009742  0.00061696 -0.03850784" rpy="3.1373499 -0.0021358 -3.1279404"/> <!-- cam to cam transform (calibration by kalibr) -->
-<!--       <origin xyz="0.03850784 0 0" rpy="0 0 ${M_PI}"/> -->
-    </xacro:camera360>
+        
+
 
     
 </robot>

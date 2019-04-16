@@ -19,6 +19,8 @@
   <xacro:property name="joint_friction" value="0.5" />
   
   <xacro:macro name="manipulator_arm_macro" params="parent *origin">
+    <xacro:arg name="add_containment_self_filter_geom" default="false"/>
+
     <joint name="arm_base_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}" />
@@ -42,6 +44,18 @@
           <box size="0.055 0.03 0.04" />
         </geometry>
       </collision>
+      
+      <xacro:if value="$(arg add_containment_self_filter_geom)">
+        <collision>
+          <origin xyz="${0.06875} ${-1*(-0.18 + 0.1618)} ${0.15/2+0.07-0.01315}" rpy="0 0 0"/>
+          <geometry>
+            <box size="${0.19*1.95} ${0.19} ${0.3}"/>
+          </geometry>
+          <material name="Grey">
+            <color rgba="0.5 0.5 0.5 1"/>
+          </material> 
+        </collision>
+      </xacro:if>
 
       <inertial>
         <origin xyz="-0.0129 0.00024 0.01759" rpy="0.0 0.0 0.0" />

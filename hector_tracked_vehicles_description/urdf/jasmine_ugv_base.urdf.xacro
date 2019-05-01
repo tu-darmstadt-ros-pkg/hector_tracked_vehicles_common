@@ -15,7 +15,7 @@
     
     <xacro:property name="base_size_x" value="0.255" />
     <xacro:property name="base_size_y" value="0.12" />
-    <xacro:property name="base_size_z" value="0.045" />
+    <xacro:property name="base_size_z" value="0.059" />
     
     <xacro:property name="wheel_radius_big" value="0.080" />
     <xacro:property name="wheel_length" value="0.02" />

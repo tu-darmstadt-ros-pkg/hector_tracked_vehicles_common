@@ -31,21 +31,31 @@
           </geometry>
         </collision>
       </xacro:if>
+      
+      <xacro:property name="collision_factor" value="2" />
+      <xacro:property name="collision_cylinder_length_factor" value="1.1" />
             
       <!-- Raycast self-filter geom -->
       <!-- Does not use boxes as raycast filtering is broken as of 27.03.2019 -->
       <xacro:if value="$(arg add_raycast_self_filter_geom)">
         <collision>
+          <origin xyz="0.0 0.0 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
+          <geometry>
+            <cylinder length="${t_base_size_x*2 * collision_cylinder_length_factor}" radius="${t_base_size_z*collision_factor}"/>
+          </geometry>
+        </collision>
+        
+        <collision>
           <origin xyz="0.0 0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
           <geometry>
-            <cylinder length="${t_base_size_x*2}" radius="${t_base_size_z*1.6}"/>
+            <cylinder length="${t_base_size_x*2 * collision_cylinder_length_factor}" radius="${t_base_size_z*collision_factor}"/>
           </geometry>
         </collision>
         
         <collision>
           <origin xyz="0.0 -0.07 ${t_offset_z}" rpy="0 ${M_PI*0.5} 0" />
           <geometry>
-            <cylinder length="${t_base_size_x*2}" radius="${t_base_size_z*1.6}"/>
+            <cylinder length="${t_base_size_x*2 * collision_cylinder_length_factor}" radius="${t_base_size_z*collision_factor}"/>
           </geometry>
         </collision>
       </xacro:if>

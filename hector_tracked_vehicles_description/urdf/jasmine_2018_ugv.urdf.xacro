@@ -59,7 +59,7 @@
     </xacro:xm430_sensor_head_macro>
 
     <xacro:jasmine_2018_structure_addons_macro parent="base_link" alu_profile_collision_size_factor="2.0">
-     <origin xyz="0 0 ${0.084-base_link_to_base_plate_dist}" rpy="0 0 0"/>       
+     <origin xyz="${base_size_x - 0.12 - computer_box_width/2} 0 ${0.084-base_link_to_base_plate_dist}" rpy="0 0 0"/>       
     </xacro:jasmine_2018_structure_addons_macro>
         
 <!--    <xacro:realsense_d435_camera_comprehensive_params name="manipulation_rgbd_cam" parent="base_link" image_topic="image_rect_color" depth_points_topic="depth/points" min_range="0.3" max_range="9.0" update_rate="20">

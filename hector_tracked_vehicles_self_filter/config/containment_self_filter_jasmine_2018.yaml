@@ -1,13 +1,14 @@
 min_sensor_dist: .15
-self_see_default_padding: 0.0
+self_see_default_padding: 0.1
 self_see_default_scale: 1.0
 self_see_links:
 - name: chassis_link
 - name: left_track_link
 - name: right_track_link
-#- name: sensor_head_mount_link
-#- name: sensor_head_yaw_link
+- name: arm_thermal_cam_frame
+- name: arm_rgbd_cam_link
 - name: autonomy_box_link
+- name: arm_base_link
 - name: arm_pitch_link_0
 - name: arm_pitch_link_1
 - name: arm_pitch_link_2

@@ -6,7 +6,7 @@
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_base.urdf.xacro" />
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_structure_addons.urdf.xacro" />
     <xacro:include filename="$(find hector_components_description)/urdf/vlp16_mount.urdf.xacro.xml"/>
-    <xacro:include filename="$(find hector_components_description)/urdf/tracker_sensor_head.urdf.xacro.xml"/>
+    <xacro:include filename="$(find hector_components_description)/urdf/xm430_sensor_head.urdf.xacro.xml"/>
     
     <xacro:include filename="$(find hector_tracked_vehicles_description)/calibrations/spin_lidar_calibration.urdf.xacro"/>
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv_arm.urdf.xacro" />
@@ -17,6 +17,8 @@
       <origin xyz="0.0 0.0 0.09446" rpy="${M_PI*0.250} 0.0 ${M_PI}"/>
     </xacro:property>
     -->
+    
+    <xacro:property name="base_link_to_base_plate_dist" value="0.059"/>    
     
     <xacro:arg name="add_default_geom" default="true"/>
     <xacro:arg name="add_containment_self_filter_geom" default="false"/>
@@ -49,15 +51,15 @@
     <link name="base_link_front"/>-->
     
     <xacro:manipulator_arm_macro parent="base_link">
-      <origin xyz="-0.1618 -0.06875 0.01315" rpy="0.0 0.0 ${M_PI/2}" />
+      <origin xyz="-0.1618 -0.06875 ${0.097-base_link_to_base_plate_dist}" rpy="0.0 0.0 ${M_PI/2}" />
     </xacro:manipulator_arm_macro>
     
-    <xacro:tracker_sensor_head_macro parent="base_link">
-      <origin xyz="${+0.18 } 0.04 ${0.05}" rpy="0.0 -0.0 ${0.0}"/>    
-    </xacro:tracker_sensor_head_macro>
+    <xacro:xm430_sensor_head_macro parent="base_link" name="sensor_head">
+      <origin xyz="0.225 0.0 ${0.077-base_link_to_base_plate_dist}" rpy="0.0 0.0 0.0"/>    
+    </xacro:xm430_sensor_head_macro>
 
     <xacro:jasmine_2018_structure_addons_macro parent="base_link" alu_profile_collision_size_factor="2.0">
-     <origin xyz="0 0 0.025" rpy="0 0 0"/>       
+     <origin xyz="0 0 ${0.084-base_link_to_base_plate_dist}" rpy="0 0 0"/>       
     </xacro:jasmine_2018_structure_addons_macro>
         
 <!--    <xacro:realsense_d435_camera_comprehensive_params name="manipulation_rgbd_cam" parent="base_link" image_topic="image_rect_color" depth_points_topic="depth/points" min_range="0.3" max_range="9.0" update_rate="20">

@@ -22,7 +22,9 @@
   <xacro:property name="joint_friction" value="0.5" />
   
   <xacro:macro name="manipulator_arm_macro" params="parent *origin">
+    <xacro:arg name="add_default_geom" default="true"/>
     <xacro:arg name="add_containment_self_filter_geom" default="false"/>
+    <xacro:arg name="add_raycast_self_filter_geom" default="false"/>
 
     <joint name="arm_base_joint" type="fixed">
       <xacro:insert_block name="origin" />
@@ -41,6 +43,7 @@
         </material>
       </visual>
       
+      
       <collision>
         <origin xyz="0.0125 0.0 0.02" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -57,6 +60,15 @@
           <material name="Grey">
             <color rgba="0.5 0.5 0.5 1"/>
           </material> 
+        </collision>
+      </xacro:if>
+      
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <collision>
+          <origin xyz="0.0125 0.0 0.02" rpy="0 ${M_PI*0.5} 0" />
+          <geometry>
+            <cylinder length="0.055" radius="0.03"/>
+          </geometry>
         </collision>
       </xacro:if>
 
@@ -95,6 +107,15 @@
           <box size="0.04 0.055 0.07" />
         </geometry>
       </collision>
+      
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <collision>
+          <origin xyz="0.0 -0.0025 0.035" rpy="0 0 0" />
+          <geometry>
+            <cylinder length="0.07" radius="0.04"/>
+          </geometry>
+        </collision>
+      </xacro:if>
 
       <inertial>
         <origin xyz="0.00023 -0.00056 0.026" rpy="0.0 0.0 0.0" />
@@ -152,6 +173,15 @@
           <box size="0.04 0.2 0.04" />
         </geometry>
       </collision>
+      
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <collision>
+          <origin xyz="0.0 0.13 0.0" rpy="${M_PI*0.5} 0 0" />
+          <geometry>
+            <cylinder length="${0.2 + 0.09}" radius="0.03"/>
+          </geometry>
+        </collision>
+      </xacro:if>
 
       <inertial>
         <origin xyz="0.00746 0.12016 0.00036" rpy="0.0 ${pi} 0.0" />
@@ -208,6 +238,15 @@
           <box size="0.055 0.035 0.04" />
         </geometry>
       </collision>
+      
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <collision>
+          <origin xyz="-0.09 0.0 0.0" rpy="0 ${M_PI*0.5} 0" />
+          <geometry>
+            <cylinder length="${0.14 + 0.08}" radius="0.03"/>
+          </geometry>
+        </collision>
+      </xacro:if>
 
       <inertial>
         <origin xyz="-0.11166 0.00016 0.00038" rpy="0.0 0.0 0.0" />
@@ -257,6 +296,15 @@
           <box size="0.05 0.035 0.05" />
         </geometry>
       </collision>
+      
+      <xacro:if value="$(arg add_raycast_self_filter_geom)">
+        <collision>
+          <origin xyz="-0.045 0.0 0.0" rpy="0 ${M_PI*0.5} 0" />
+          <geometry>
+            <cylinder length="${0.05}" radius="0.03"/>
+          </geometry>
+        </collision>
+      </xacro:if>
 
 <!--      <inertial>
         <origin xyz="-0.11166 0.00016 0.00038" rpy="0.0 0.0 0.0" />

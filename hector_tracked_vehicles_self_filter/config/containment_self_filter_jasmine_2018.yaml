@@ -8,7 +8,6 @@ self_see_links:
 - name: arm_thermal_cam_frame
 - name: arm_rgbd_cam_link
 - name: autonomy_box_link
-- name: arm_base_link
 - name: arm_pitch_link_0
 - name: arm_pitch_link_1
 - name: arm_pitch_link_2

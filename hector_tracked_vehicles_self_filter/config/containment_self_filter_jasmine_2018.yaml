@@ -5,8 +5,6 @@ self_see_links:
 - name: chassis_link
 - name: left_track_link
 - name: right_track_link
-- name: arm_thermal_cam_frame
-- name: arm_rgbd_cam_link
 - name: autonomy_box_link
 - name: arm_pitch_link_0
 - name: arm_pitch_link_1
@@ -16,5 +14,9 @@ self_see_links:
 - name: gripper_finger_link_0
 - name: gripper_finger_link_1
 - name: gripper_palm_link
+- name: sensor_head_yaw_link
+- name: sensor_head_pitch_link
+- name: arm_rgbd_cam_link
+- name: arm_thermal_cam_frame
 
 

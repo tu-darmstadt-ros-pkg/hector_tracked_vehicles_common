@@ -92,6 +92,13 @@ manipulator_arm_control:
       
     gains: # Required because we're controlling an effort interface
       gripper_servo_joint: {p: 10,  d: 0.0, i: 0, i_clamp: 0}
+      
+    constraints:
+      goal_time: *goal_time_constraint
+      stopped_velocity_tolerance: 1.0
+      gripper_servo_joint:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
     
     
   #flipper_traj_controller:

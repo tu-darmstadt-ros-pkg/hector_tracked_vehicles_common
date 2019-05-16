@@ -82,7 +82,7 @@
     </link>
 
     <joint name="arm_yaw_joint" type="revolute">
-      <origin xyz="0.0 0 0.036" rpy="0.0 0.0 ${pi / 2}" />
+      <origin xyz="0.0 0 0.086" rpy="0.0 0.0 ${pi / 2}" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_base_link" />
@@ -127,7 +127,7 @@
     </link>
 
     <joint name="arm_pitch_joint_0" type="revolute">
-      <origin xyz="0.0 0.0 0.0515" rpy=" ${pi/2} 0.0 0.0" />
+      <origin xyz="0.0 0.0 0.0275" rpy=" ${pi/2} 0.0 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM540_W270_max_effort}" velocity="${XM540_W270_max_velocity}" />
       <parent link="arm_yaw_link" />
@@ -193,7 +193,7 @@
     </link>
 
     <joint name="arm_pitch_joint_1" type="revolute">
-      <origin xyz="0.026 0.2517 0.0" rpy="0.0 0.0 ${-pi}" />
+      <origin xyz="0.031 0.2505 0.0" rpy="0.0 0.0 ${-pi}" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi/2}" upper="${pi/2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_0" />
@@ -258,7 +258,7 @@
     </link>
 
     <joint name="arm_pitch_joint_2" type="revolute">
-      <origin xyz="-0.1967 -0.004 0.0" rpy="0.0 0.0 0.0" />
+      <origin xyz="-0.2017 -0.002 0.0" rpy="0.0 0.0 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_1" />

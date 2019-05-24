@@ -43,11 +43,10 @@
         </material>
       </visual>
       
-      
       <collision>
-        <origin xyz="0.0125 0.0 0.02" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.0 0.044" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.055 0.03 0.04" />
+          <box size="0.042 0.042 0.084" />
         </geometry>
       </collision>
       
@@ -82,7 +81,7 @@
     </link>
 
     <joint name="arm_yaw_joint" type="revolute">
-      <origin xyz="0.0 0 0.036" rpy="0.0 0.0 ${pi / 2}" />
+      <origin xyz="0.0 0 0.086" rpy="0.0 0.0 ${pi / 2}" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_base_link" />
@@ -102,9 +101,16 @@
       </visual>
       
       <collision>
-        <origin xyz="0.0 -0.0025 0.035" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.0 0.027" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.04 0.055 0.07" />
+          <box size="0.042 0.089 0.042" />
+        </geometry>
+      </collision>
+      
+      <collision>
+        <origin xyz="0.0 0.0 0.0075" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <box size="0.05 0.042 0.015" />
         </geometry>
       </collision>
       
@@ -127,7 +133,7 @@
     </link>
 
     <joint name="arm_pitch_joint_0" type="revolute">
-      <origin xyz="0.0 0.0 0.0515" rpy=" ${pi/2} 0.0 0.0" />
+      <origin xyz="0.0 0.0 0.027" rpy=" ${pi/2} 0.0 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM540_W270_max_effort}" velocity="${XM540_W270_max_velocity}" />
       <parent link="arm_yaw_link" />
@@ -147,30 +153,37 @@
       </visual>
       
       <collision>
-        <origin xyz="0.0 0.01 0.025" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.01 0.045" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.035 0.045 0.01" />
+          <box size="0.045 0.06 0.01" />
         </geometry>
       </collision>
 
       <collision>
-        <origin xyz="0.0 0.01 -0.025" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.01 -0.045" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.035 0.045 0.01" />
+          <box size="0.045 0.06 0.01" />
         </geometry>
       </collision>
       
      <collision>
-        <origin xyz="0.01 0.25 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.0325 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.06 0.04 0.04" />
+          <box size="0.042 0.015 0.09" />
         </geometry>
      </collision>
       
       <collision>
-        <origin xyz="0.0 0.13 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.135 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.04 0.2 0.04" />
+          <box size="0.035 0.2 0.055" />
+        </geometry>
+      </collision>
+      
+      <collision>
+        <origin xyz="0.015 0.252 0.0" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <box size="0.06 0.0425 0.05" />
         </geometry>
       </collision>
       
@@ -193,7 +206,7 @@
     </link>
 
     <joint name="arm_pitch_joint_1" type="revolute">
-      <origin xyz="0.026 0.2517 0.0" rpy="0.0 0.0 ${-pi}" />
+      <origin xyz="0.031 0.2545 0.0" rpy="0.0 0.0 ${-pi}" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi/2}" upper="${pi/2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_0" />
@@ -213,25 +226,30 @@
       </visual>
 
       <collision>
-        <origin xyz="-0.01 0.0 0.02" rpy="0.0 0.0 0.0" />
+        <origin xyz="-0.0125 0.0 0.0275" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.04 0.03 0.0075" />
+          <box size="0.04 0.03 0.01" />
         </geometry>
       </collision>
 
       <collision>
-        <origin xyz="-0.01 0.0 -0.02" rpy="0.0 0.0 0.0" />
+        <origin xyz="-0.0125 0.0 -0.0275" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.04 0.03 0.0075" />
+          <box size="0.04 0.03 0.01" />
         </geometry>
       </collision>
       <collision>
         <origin xyz="-0.09 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
-          <box size="0.14 0.03 0.04" />
+          <box size="0.13 0.03 0.055" />
         </geometry>
       </collision>
-      
+      <collision>
+        <origin xyz="-0.03 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <box size="0.01 0.04 0.055" />
+        </geometry>
+      </collision>
       <collision>
         <origin xyz="-0.182 -0.004 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -258,7 +276,7 @@
     </link>
 
     <joint name="arm_pitch_joint_2" type="revolute">
-      <origin xyz="-0.1967 -0.004 0.0" rpy="0.0 0.0 0.0" />
+      <origin xyz="-0.2017 -0.002 0.0" rpy="0.0 0.0 0.0" />
       <axis xyz="0 0 1" />
       <limit lower="${-pi / 2}" upper="${pi / 2}" effort="${XM430_W350_max_effort}" velocity="${XM430_W350_max_velocity}" />
       <parent link="arm_pitch_link_1" />

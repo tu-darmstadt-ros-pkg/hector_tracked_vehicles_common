@@ -399,7 +399,7 @@
     
     <link name="gripper_palm_link">
       <visual>
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi}" />
         <geometry>
           <mesh filename="package://hector_tracked_vehicles_description/meshes/jasmine_ugv/gripper/gripper_palm.stl" scale="0.001 0.001 0.001" />
         </geometry>
@@ -454,6 +454,13 @@
         <origin xyz="0.03 -0.02 0.04" rpy="${-pi/2} 0.0 ${pi/2}" />
         <geometry>
           <cylinder length="0.02" radius="0.028" />
+        </geometry>
+      </collision>
+      
+      <collision>
+        <origin xyz="0.0615 0.0 0.048" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <box size="0.043 0.07 0.035" />
         </geometry>
       </collision>
 	  
@@ -635,9 +642,16 @@
     </link>
     
     <xacro:generic_camera name="gripper_cam" parent="gripper_palm_link" ros_topic="/gripper_cam/image_raw" cam_info_topic="/gripper_cam/camera_info" update_rate="15" res_x="640" res_y="480" image_format="R8G8B8" hfov="60">
-      <origin xyz="0 0 ${0.034 + 0.02}" rpy="${pi} ${-pi/2} ${-pi/2}"/>
+      <origin xyz="0 0 0.038" rpy="${pi} ${-pi/2} 0"/>
     </xacro:generic_camera>
 
+    <xacro:generic_camera name="gripper_top_cam" parent="gripper_palm_link" ros_topic="/gripper_top_cam/image_raw" cam_info_topic="/gripper_top_cam/camera_info" update_rate="15" res_x="640" res_y="480" image_format="R8G8B8" hfov="60">
+      <origin xyz="0.067 0 0.048" rpy="${pi} ${-pi/2} 0"/>
+    </xacro:generic_camera>
+    
+    <xacro:seek_thermal_compact_camera_no_geom name="gripper_thermal_cam" parent="gripper_palm_link">
+      <origin xyz="0.051 0.006 0.045" rpy="0 ${-0.5*M_PI} ${-0.5*M_PI}"/>
+    </xacro:seek_thermal_compact_camera_no_geom>
  
   </xacro:macro>
 </robot>

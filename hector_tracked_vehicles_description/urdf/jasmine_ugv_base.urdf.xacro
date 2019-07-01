@@ -80,6 +80,6 @@
           <origin xyz="0 ${-wheel_offset_y} 0 " rpy="0 0 0" />  
         </xacro:jasmine_ugv_track_link>
             
-        <xacro:tracked_vehicle_gazebo_plugin tracks_separation="${base_size_y + track_width}"/>
+        <xacro:tracked_vehicle_gazebo_plugin tracks_separation="${2*base_size_y + track_width}"/>
     </xacro:macro>
 </robot>

@@ -1,0 +1,56 @@
+cloud_filter_chain:
+  - name: robot_body_filter
+    type: robot_body_filter/RobotBodyFilterPointCloud2
+    params:
+      bounding_box/publish_cut_out_pointcloud: true
+      bounding_box/compute: true
+      bounding_box/marker: true
+      bounding_box/debug: true
+      bounding_sphere/publish_cut_out_pointcloud: true
+      bounding_sphere/compute: true
+      bounding_sphere/marker: true
+      bounding_sphere/debug: true
+      oriented_bounding_box/publish_cut_out_pointcloud: true
+      oriented_bounding_box/compute: true
+      oriented_bounding_box/marker: true
+      oriented_bounding_box/debug: true
+      local_bounding_box/publish_cut_out_pointcloud: true
+      local_bounding_box/compute: true
+      local_bounding_box/marker: true
+      local_bounding_box/debug: true
+      debug/marker/contains: true
+      debug/marker/shadow: true
+      debug/pcl/clip: true
+      debug/pcl/shadow: true
+      debug/pcl/inside: true
+      sensor/point_by_point: false
+      sensor/min_distance: 0.15
+      sensor/max_distance: 0
+      frames/sensor: spin_lidar_lidar_mount_link_fixed
+      frames/filtering: spin_lidar_lidar_mount_link_fixed
+      frames/output: spin_lidar_lidar_mount_link_fixed
+      body_model/inflation/scale: 1.0
+      body_model/inflation/padding: 0.0
+      body_model/robot_description_param: /robot_description
+      filter/do_clipping: true
+      filter/do_contains_test: true
+      filter/do_shadow_test: true
+      only_links:
+        - chassis_link
+        - left_track_link
+        - right_track_link
+        - autonomy_box_link
+        - arm_pitch_link_0
+        - arm_pitch_link_1
+        - arm_pitch_link_2
+        - arm_roll_link
+        - arm_yaw_link
+        - gripper_finger_link_0
+        - gripper_finger_link_1
+        - gripper_palm_link
+        - sensor_head_yaw_link
+        - sensor_head_pitch_link
+        - arm_rgbd_cam_link
+        - arm_thermal_cam_frame
+        
+        

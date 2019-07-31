@@ -29,7 +29,7 @@
       <alwaysOn>true</alwaysOn>
       <updateRate>50.0</updateRate>
       <bodyName>base_link</bodyName>
-      <topicName>imu_quat</topicName>
+      <topicName>imu/data</topicName>
       <accelDrift>0.0 0.0 0.0</accelDrift>
       <accelGaussianNoise>0.1 0.1 0.1</accelGaussianNoise>
       <rateDrift>0.0 0.0 0.0</rateDrift>

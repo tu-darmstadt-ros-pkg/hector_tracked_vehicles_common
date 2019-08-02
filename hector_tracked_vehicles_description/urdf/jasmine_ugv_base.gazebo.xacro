@@ -61,7 +61,7 @@
         <track_mu>5</track_mu>
         <track_mu2>2</track_mu2>
         <tracks_separation>${tracks_separation}</tracks_separation>
-        <steering_efficiency>0.2</steering_efficiency>
+        <steering_efficiency>0.5</steering_efficiency>
         <max_linear_speed>1.0</max_linear_speed>
         <max_angular_speed>1</max_angular_speed>
       </plugin>

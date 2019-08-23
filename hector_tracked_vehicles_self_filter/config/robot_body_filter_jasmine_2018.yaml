@@ -3,8 +3,8 @@ cloud_filter_chain:
     type: robot_body_filter/RobotBodyFilterPointCloud2
     params:
       debug/pcl/clip: false
+      debug/pcl/inside: false
       debug/pcl/shadow: false
-      debug/pcl/inside: true
       sensor/point_by_point: false
       sensor/min_distance: 0.15
       sensor/max_distance: 0
@@ -13,7 +13,7 @@ cloud_filter_chain:
       frames/output: spin_lidar_lidar_mount_link_fixed
       frames/fixed: spin_lidar_lidar_mount_link_fixed
       body_model/inflation/scale: 1.0
-      body_model/inflation/padding: 0.02
+      body_model/inflation/padding: 0.03
       body_model/robot_description_param: /robot_description
       filter/do_clipping: true
       filter/do_contains_test: true
@@ -28,19 +28,39 @@ cloud_filter_chain:
         - arm_pitch_link_2
         - arm_roll_link
         - arm_yaw_link
-        - gripper_finger_link_0
-        - gripper_finger_link_1
-        - gripper_palm_link
         - sensor_head_yaw_link
         - sensor_head_pitch_link
         - arm_rgbd_cam_link
         - arm_thermal_cam_frame
+  - name: robot_body_filter_containment_gripper
+    type: robot_body_filter/RobotBodyFilterPointCloud2
+    params:
+      debug/pcl/clip: false
+      debug/pcl/inside: true
+      debug/pcl/shadow: false
+      sensor/point_by_point: false
+      sensor/min_distance: 0.15
+      sensor/max_distance: 0
+      frames/sensor: spin_lidar_lidar_mount_link_fixed
+      frames/filtering: spin_lidar_lidar_mount_link_fixed
+      frames/output: spin_lidar_lidar_mount_link_fixed
+      frames/fixed: spin_lidar_lidar_mount_link_fixed
+      body_model/inflation/scale: 1.0
+      body_model/inflation/padding: 0.1
+      body_model/robot_description_param: /robot_description
+      filter/do_clipping: false
+      filter/do_contains_test: true
+      filter/do_shadow_test: false
+      only_links:
+        - gripper_palm_link
+        - gripper_finger_link_0
+        - gripper_finger_link_1
   - name: robot_body_filter_shadow
     type: robot_body_filter/RobotBodyFilterPointCloud2
     params:
       debug/pcl/clip: false
-      debug/pcl/shadow: true
       debug/pcl/inside: false
+      debug/pcl/shadow: true
       sensor/point_by_point: false
       sensor/min_distance: 0.15
       sensor/max_distance: 0
@@ -55,10 +75,6 @@ cloud_filter_chain:
       filter/do_contains_test: false
       filter/do_shadow_test: true
       only_links:
-        - chassis_link
-        - left_track_link
-        - right_track_link
-        - autonomy_box_link
         - arm_pitch_link_0
         - arm_pitch_link_1
         - arm_pitch_link_2
@@ -69,7 +85,33 @@ cloud_filter_chain:
         - gripper_palm_link
         - sensor_head_yaw_link
         - sensor_head_pitch_link
+  - name: robot_body_filter_shadow_chassis
+    type: robot_body_filter/RobotBodyFilterPointCloud2
+    params:
+      debug/pcl/clip: false
+      debug/pcl/inside: false
+      debug/pcl/shadow: false
+      sensor/point_by_point: false
+      sensor/min_distance: 0.15
+      sensor/max_distance: 0
+      frames/sensor: spin_lidar_lidar_mount_link_fixed
+      frames/filtering: spin_lidar_lidar_mount_link_fixed
+      frames/output: spin_lidar_lidar_mount_link_fixed
+      frames/fixed: spin_lidar_lidar_mount_link_fixed
+      body_model/inflation/scale: 1.0
+      body_model/inflation/padding: 0.02
+      body_model/robot_description_param: /robot_description
+      filter/do_clipping: false
+      filter/do_contains_test: false
+      filter/do_shadow_test: true
+      only_links:
+        - chassis_link
+        - left_track_link
+        - right_track_link
+        - sensor_head_yaw_link
+        - sensor_head_pitch_link
         - arm_rgbd_cam_link
         - arm_thermal_cam_frame
+
         
         

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <robot name="obelix_ugv_sim_wheels"
-    xmlns:xacro="http://ros.org/wiki/xacro"
+    xmlns:xacro="http://www.ros.org/wiki/xacro"
     xmlns:interface="http://ros.org/wiki/xacro">
     
     <!-- Included URDF Files -->

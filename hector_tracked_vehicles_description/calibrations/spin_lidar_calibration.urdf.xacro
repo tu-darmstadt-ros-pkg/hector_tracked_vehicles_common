@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <robot name="taurob_tracker"
-       xmlns:xacro="http://ros.org/wiki/xacro">
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
   
 <!--  <xacro:property name="single_lidar_calibration">
     <xacro:include filename="$(find argo_tracker_description)/calibrations/$(optenv ARGO_ROBOT_TYPE atex_robot)_spinning_single_lidar_calibration.urdf.xacro"/>

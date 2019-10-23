@@ -2,7 +2,7 @@
 
 <robot
     xmlns:xacro="http://www.ros.org/wiki/xacro"
-    xmlns:interface="http://ros.org/wiki/xacro">
+    xmlns:interface="http://www.ros.org/wiki/xacro">
     
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/tracked_wheel.urdf.xacro" />
     <xacro:include filename="$(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_tracks.urdf.xacro" />

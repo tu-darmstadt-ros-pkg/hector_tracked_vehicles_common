@@ -19,9 +19,11 @@
   <!-- Dependencies needed after this package is compiled. -->
   <run_depend>controller_manager</run_depend>
   <run_depend>gazebo_ros</run_depend>
+  <run_depend>hector_components_description</run_depend>
   <run_depend>hector_imu_attitude_to_tf</run_depend>
-  <run_depend>hector_roll_pitch_stabilizer</run_depend>
+  <run_depend>hector_sensors_description</run_depend>
   <run_depend>hector_xacro_tools</run_depend>
+  <run_depend>hlugv_gazebo</run_depend>
   <run_depend>joint_state_publisher</run_depend>
   <run_depend>nodelet</run_depend>
   <run_depend>pr2_controller_manager</run_depend>

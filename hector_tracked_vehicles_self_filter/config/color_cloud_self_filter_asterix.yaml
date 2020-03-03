@@ -1,0 +1,29 @@
+min_sensor_dist: .15
+self_see_default_padding: 0.0
+self_see_default_scale: 1.0
+self_see_links:
+- name: arm_link1
+- name: arm_link2
+- name: arm_link3
+- name: arm_link4
+- name: arm_link5
+- name: arm_link6
+- name: arm_end_link
+- name: gripper_base
+- name: gripper_link_l1
+- name: gripper_link_l2
+- name: gripper_link_r1
+- name: gripper_link_r2
+- name: chassis_link
+- name: main_track_left_link
+- name: main_track_right_link
+- name: flipper_back_left_link
+- name: flipper_back_right_link
+- name: flipper_front_left_link
+- name: flipper_front_right_link
+- name: autonomy_box_link
+- name: sensor_head_yaw_link
+- name: sensor_head_pitch_link
+- name: arm_rgbd_cam_link
+
+

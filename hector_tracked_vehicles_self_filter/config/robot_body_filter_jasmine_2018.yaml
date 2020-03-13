@@ -31,8 +31,8 @@ cloud_filter_chain:
         - arm_yaw_link
         - sensor_head_yaw_link
         - sensor_head_pitch_link
-        - arm_rgbd_cam_link
-        - arm_thermal_cam_frame
+        - sensor_head_rgbd_cam_link
+        - sensor_head_thermal_cam_frame
   # Containment filtering for gripper with more padding (cables, higher uncertainty)
   - name: robot_body_filter_containment_gripper
     type: robot_body_filter/RobotBodyFilterPointCloud2
@@ -112,8 +112,8 @@ cloud_filter_chain:
         - right_track_link
         - sensor_head_yaw_link
         - sensor_head_pitch_link
-        - arm_rgbd_cam_link
-        - arm_thermal_cam_frame
+        - sensor_head_rgbd_cam_link
+        - sensor_head_thermal_cam_frame
         - gripper_finger_link_0
         - gripper_finger_link_1
 

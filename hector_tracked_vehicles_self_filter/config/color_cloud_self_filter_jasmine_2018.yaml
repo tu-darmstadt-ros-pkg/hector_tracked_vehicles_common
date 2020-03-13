@@ -5,8 +5,8 @@ self_see_default_padding: 0.0
 self_see_default_scale: 1.0
 self_see_links:
 - name: chassis_link
-- name: arm_thermal_cam_frame
-- name: arm_rgbd_cam_link
+- name: sensor_head_thermal_cam_frame
+- name: sensor_head_rgbd_cam_link
 - name: autonomy_box_link
 
 

@@ -24,6 +24,6 @@ self_see_links:
 - name: autonomy_box_link
 - name: sensor_head_yaw_link
 - name: sensor_head_pitch_link
-- name: arm_rgbd_cam_link
+- name: sensor_head_rgbd_cam_link
 
 

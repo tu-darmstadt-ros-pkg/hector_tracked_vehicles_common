@@ -16,7 +16,7 @@ self_see_links:
 - name: gripper_palm_link
 - name: sensor_head_yaw_link
 - name: sensor_head_pitch_link
-- name: arm_rgbd_cam_link
-- name: arm_thermal_cam_frame
+- name: sensor_head_rgbd_cam_link
+- name: sensor_head_thermal_cam_frame
 
 

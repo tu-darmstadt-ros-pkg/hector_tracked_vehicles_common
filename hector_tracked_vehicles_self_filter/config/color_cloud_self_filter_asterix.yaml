@@ -2,12 +2,12 @@ min_sensor_dist: .15
 self_see_default_padding: 0.0
 self_see_default_scale: 1.0
 self_see_links:
-- name: arm_link1
-- name: arm_link2
-- name: arm_link3
-- name: arm_link4
-- name: arm_link5
-- name: arm_link6
+- name: arm_link_0
+- name: arm_link_1
+- name: arm_link_2
+- name: arm_link_3
+- name: arm_link_4
+- name: arm_link_5
 - name: arm_end_link
 - name: gripper_base
 - name: gripper_link_l1

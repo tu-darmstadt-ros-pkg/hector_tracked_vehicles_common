@@ -3,6 +3,8 @@ cloud_filter_chain:
   - name: robot_body_filter_containment
     type: robot_body_filter/RobotBodyFilterPointCloud2
     params:
+      transforms/timeout/unreachable: 1.0
+      transforms/timeout/reachable: 1.0
       debug/pcl/clip: false
       debug/pcl/inside: false
       debug/pcl/shadow: false
@@ -37,6 +39,8 @@ cloud_filter_chain:
   - name: robot_body_filter_containment_gripper
     type: robot_body_filter/RobotBodyFilterPointCloud2
     params:
+      transforms/timeout/unreachable: 1.0
+      transforms/timeout/reachable: 1.0
       debug/pcl/clip: false
       debug/pcl/inside: true
       debug/pcl/shadow: false
@@ -61,6 +65,8 @@ cloud_filter_chain:
   - name: robot_body_filter_shadow
     type: robot_body_filter/RobotBodyFilterPointCloud2
     params:
+      transforms/timeout/unreachable: 1.0
+      transforms/timeout/reachable: 1.0
       debug/pcl/clip: false
       debug/pcl/inside: false
       debug/pcl/shadow: true

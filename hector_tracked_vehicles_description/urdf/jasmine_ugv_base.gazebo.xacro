@@ -58,8 +58,8 @@
         <body>base_link</body>
         <left_track0>left_track_link</left_track0>
         <right_track0>right_track_link</right_track0>
-        <track_mu>5</track_mu>
-        <track_mu2>2</track_mu2>
+        <track_mu>0.7</track_mu>
+        <track_mu2>150</track_mu2>
         <tracks_separation>${tracks_separation}</tracks_separation>
         <steering_efficiency>0.5</steering_efficiency>
         <max_linear_speed>1.0</max_linear_speed>

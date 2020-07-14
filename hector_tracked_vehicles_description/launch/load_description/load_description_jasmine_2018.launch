@@ -2,5 +2,5 @@
 
 
 <launch>
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro $(find hector_tracked_vehicles_description)/urdf/jasmine_2018_ugv.urdf.xacro" />
 </launch>

@@ -22,6 +22,8 @@ self_see_links:
 - name: flipper_front_left_link
 - name: flipper_front_right_link
 - name: autonomy_box_link
+- name: front_rgbd_cam_link
+- name: back_rgbd_cam_link
 - name: sensor_head_yaw_link
 - name: sensor_head_pitch_link
 - name: sensor_head_rgbd_cam_link

@@ -3,7 +3,7 @@
 <launch>
   
   <include file="$(find hector_tracked_vehicles_description)/launch/xacrodisplay_common.launch">
-    <arg name="robot_description" value="$(find xacro)/xacro.py $(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_standalone.urdf.xacro"/>  
+    <arg name="robot_description" value="$(find xacro)/xacro $(find hector_tracked_vehicles_description)/urdf/jasmine_ugv_standalone.urdf.xacro"/>
   </include>  
   
 </launch>

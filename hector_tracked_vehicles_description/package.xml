@@ -33,6 +33,7 @@
   <run_depend>tf2_ros</run_depend>
   <run_depend>topic_tools</run_depend>
   <run_depend>xacro</run_depend>
+  <run_depend>joint_state_publisher_gui</run_depend>
 
   <!-- Dependencies needed only for running tests. -->
 
